@@ -1,0 +1,145 @@
+// BASE STYLING
+* {
+  box-sizing: border-box;
+  &::-webkit-scrollbar { width: 0 !important }
+
+}
+html, body {
+  width: 100%;
+    font-size: @base-font-size; // BASE FONT SIZE
+    -ms-overflow-style: none;
+    font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    .font-normal();
+}
+h1 {
+  display: none !important;
+}
+h2, h3, h4, h5 {
+    margin: 0;
+    .font-bold();
+}
+
+h2 {
+    font-size: 68px;
+}
+h3 {
+    font-size: 40px;
+}
+h4 {
+    font-size: 28px;
+}
+h5 {
+    font-size: 18px;
+}
+a,
+p {
+  color: @theme-color-pri;
+}
+li {
+    line-height: 1.6em;
+    margin-bottom: 8px;
+}
+
+p {
+  line-height: 1.3em;
+  margin-bottom: 5px;
+}
+
+ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+// Form placeholders
+.placeholder(@theme-color-pri);
+
+/* VALIGN CLASSES */
+.ghost,
+.pacman {
+  display: inline-block;
+  vertical-align: middle;
+}
+.ghost {
+  height: 100%;
+  width: 0.01%;
+}
+.pacman {
+  width: 99.9%;
+}
+
+// Helper classes
+.img-responsive {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-pri {
+  color: @theme-color-pri;
+}
+.text-sec {
+  color: @theme-color-sec;
+}
+.text-tri {
+  color: @theme-color-tri;
+}
+
+// Clearfix
+.cf {
+  .clearfix();
+}
+
+// Background images
+.cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+ul.nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  li {
+    display: inline-block;
+  }
+}
+
+// Padding classes
+.pad-top {
+    padding-top: @base-padding;
+}
+.pad-right {
+    padding-right: @base-padding;
+}
+.pad-bottom {
+    padding-bottom: @base-padding;
+}
+.pad-left {
+    padding-left: @base-padding;
+}
+
+// BrowserSync overlay
+#__bs_notify__ {
+  top: auto !important;
+  bottom: 0 !important;
+  border-radius: 0 !important;
+  padding: 5px !important;
+}

@@ -31,8 +31,12 @@ vultrWebClient.config([
       });
 
     // Restangular Config
-    RestangularProvider.setBaseUrl('/api/v1');
-    RestangularProvider.setRequestSuffix('/');
+    RestangularProvider.setBaseUrl('https://api.vultr.com/v1');
+    RestangularProvider.setDefaultHttpFields({withCredentials: true});
+    RestangularProvider.setDefaultHeaders({
+      "Content-Type": "application/json",
+      "X-Requested-With": "XMLHttpRequest"
+    });
     RestangularProvider.setResponseExtractor(function(response, operation) {
       if(operation == 'getList') {
         response.objects.meta = response.meta;

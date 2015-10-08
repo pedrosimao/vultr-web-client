@@ -1,0 +1,31 @@
+// THEME COLOURS
+@theme-color-pri: #333;
+@theme-color-sec: #AAA;
+@theme-color-tri: #FFF;
+
+// PADDINGS
+@base-padding: 30px;
+@base-padding-sm: 15px;
+
+// FONTS
+@base-font-size: 16px;
+
+.font-normal() {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+.font-bold() {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+}
+// Clearfix
+.clearfix() {
+  &:before,
+  &:after{
+    content:"";
+    display:table;
+  }
+  &:after{
+    clear: both;
+  }
+}

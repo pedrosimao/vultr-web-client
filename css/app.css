@@ -1,0 +1,189 @@
+* {
+  box-sizing: border-box;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+}
+html,
+body {
+  width: 100%;
+  font-size: 16px;
+  -ms-overflow-style: none;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+h1 {
+  display: none !important;
+}
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+h2 {
+  font-size: 68px;
+}
+h3 {
+  font-size: 40px;
+}
+h4 {
+  font-size: 28px;
+}
+h5 {
+  font-size: 18px;
+}
+a,
+p {
+  color: #333;
+}
+li {
+  line-height: 1.6em;
+  margin-bottom: 8px;
+}
+p {
+  line-height: 1.3em;
+  margin-bottom: 5px;
+}
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: inherit;
+  font-family: inherit;
+  text-decoration: none;
+}
+::-webkit-input-placeholder {
+  color: #333;
+}
+:-moz-placeholder {
+  color: #333;
+}
+::-moz-placeholder {
+  color: #333;
+}
+:-ms-input-placeholder {
+  color: #333;
+}
+/* VALIGN CLASSES */
+.ghost,
+.pacman {
+  display: inline-block;
+  vertical-align: middle;
+}
+.ghost {
+  height: 100%;
+  width: 0.01%;
+}
+.pacman {
+  width: 99.9%;
+}
+.img-responsive {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-pri {
+  color: #333;
+}
+.text-sec {
+  color: #AAA;
+}
+.text-tri {
+  color: #FFF;
+}
+.cf:before,
+.cf:after {
+  content: "";
+  display: table;
+}
+.cf:after {
+  clear: both;
+}
+.cover {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+ul.nav {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+ul.nav li {
+  display: inline-block;
+}
+.pad-top {
+  padding-top: 30px;
+}
+.pad-right {
+  padding-right: 30px;
+}
+.pad-bottom {
+  padding-bottom: 30px;
+}
+.pad-left {
+  padding-left: 30px;
+}
+#__bs_notify__ {
+  top: auto !important;
+  bottom: 0 !important;
+  border-radius: 0 !important;
+  padding: 5px !important;
+}
+#main {
+  width: 100%;
+  padding-top: 48px;
+}
+#nav-main {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-bottom: 1px solid #333;
+  background: #FFF;
+}
+#nav-main ul {
+  width: 100%;
+}
+#nav-main ul li {
+  width: 33.33%;
+}
+#login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000;
+  z-index: 99999;
+  zoom: 1;
+  filter: alpha(opacity=90);
+  -webkit-opacity: 0.9;
+  -moz-opacity: 0.9;
+  opacity: 0.9;
+  color: #AAA;
+}
+.panel {
+  padding: 15px;
+}
+table {
+  max-width: 100%;
+}

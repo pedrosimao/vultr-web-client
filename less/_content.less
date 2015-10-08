@@ -1,0 +1,42 @@
+#main {
+    width: 100%;
+    padding-top: 48px;
+}
+
+#nav-main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-bottom: 1px solid @theme-color-pri;
+    background: @theme-color-tri;
+    ul {
+        width: 100%;
+        li {
+            width: 33.33%;
+        }
+    }
+}
+
+#login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #000;
+    z-index: 99999;
+    .opacity(0.9);
+
+    color: @theme-color-sec;
+}
+
+.panel {
+    padding: @base-padding-sm;
+}
+
+table {
+    max-width: 100%;
+}
+
