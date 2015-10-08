@@ -17,83 +17,31 @@
             <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
         <!--<![endif]-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/style.css.min">
         <script src="js/modernizr.js"></script>
     </head>
-    <body>
+    <body ng-app="vultrWebClient">
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
         <div id="main">
-            <ul class="tabs vertical" data-tab>
-              <li class="tab-title active"><a href="#panel11"><i class="fa fa-home"></i></a></li>
-              <li class="tab-title"><a href="#panel21"><i class="fa fa-plus-circle"></i></a></li>
-              <li class="tab-title"><a href="#panel31"><i class="fa fa-cog"></i></a></li>
-            </ul>
-            <div class="tabs-content">
-              <div class="content active" id="panel11">
-                <div class="top">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Label</th>
-                                <th>IP</th>
-                                <th>Status</th>
-                                <th>O/S</th>
-                                <th>Location</th>
-                                <th>Charges</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>devbox</td>
-                                <td>45.32.242.144</td>
-                                <td>Running</td>
-                                <td>Ubuntu</td>
-                                <td>Sydney</td>
-                                <td>$0.3</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="bottom">
-                    <div id="actions">
-                        <a class="button secondary"><i class="fa fa-stop fa-fx"></i></a>
-                        <a class="button secondary"><i class="fa fa-refresh fa-fx"></i></a>
-                        <a class="button secondary"><i class="fa fa-download fa-fx"></i></a>
-                        <a class="button secondary"><i class="fa fa-exchange fa-fx"></i></a>
-                        <a class="button secondary"><i class="fa fa-times fa-fx"></i></a>
-                    </div>
-
-                    <div id="detail">
-                        <ul class="tabs" data-tab>
-                          <li class="tab-title active"><a href="#panel12"><i class="fa fa-fx fa-info-circle"></i></a></li>
-                          <li class="tab-title"><a href="#panel22"><i class="fa fa-fx fa-bar-chart"></i></a></li>
-                          <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-cloud"></i></a></li>
-                          <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-cog"></i></a></li>
-                          <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-camera-retro"></i></a></li>
-                          <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-download"></i></a></li>
-                        </ul>
-
-                    </div>
-                </div>
-              </div>
-              <div class="content" id="panel21">
-                <p>Deploy new instance form</p>
-              </div>
-              <div class="content" id="panel31">
-                <p>Snapshots/isos/scripts/keys/etc. Additional tab/item: info from /account/info</p>
-              </div>
-            </div>
-            
+            <nav id="nav-main">
+                <ul class="menu">
+                  <li class="menu-item"><a href="/#/machines" class="pure-button"><i class="fa fa-home fa-fx"></i></a></li>
+                  <li class="menu-item"><a href="/#/deploy" class="pure-button"><i class="fa fa-plus-circle fa-fx"></i></a></li>
+                  <li class="menu-item"><a href="/#/settings" class="pure-button"><i class="fa fa-cog fa-fx"></i></a></li>
+                </ul>
+            </nav>
+            <div ng-view class="root-view"></div>            
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.4/angular-route.min.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/restangular/latest/restangular.js"></script>
 
-        <script src="js/script.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/controllers/MachinesCtrl.js"></script>
     </body>
 </html>
