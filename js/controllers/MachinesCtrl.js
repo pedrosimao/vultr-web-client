@@ -4,11 +4,7 @@
  */
 vultrWebClient.controller('MachinesCtrl', [
   '$scope',
-  'Restangular',
-  '$routeParams',
   function(
-    $scope,
-    Restangular,
-    $routeParams) {
+    $scope) {
 
   }]);

@@ -1,14 +1,12 @@
-var vultrWebClient = angular.module('vultrWebClient', ['restangular', 'ngRoute']);
+var vultrWebClient = angular.module('vultrWebClient', ['ngRoute']);
 
 /**
  * App Config
  */
 vultrWebClient.config([
   '$routeProvider',
-  'RestangularProvider',
   function(
-    $routeProvider,
-    RestangularProvider) {
+    $routeProvider) {
 
     $routeProvider.
       when('/machines', {
@@ -29,20 +27,4 @@ vultrWebClient.config([
       otherwise({
         redirectTo: '/machines'
       });
-
-    // Restangular Config
-    RestangularProvider.setBaseUrl('https://api.vultr.com/v1');
-    RestangularProvider.setDefaultHttpFields({withCredentials: true});
-    RestangularProvider.setDefaultHeaders({
-      "Content-Type": "application/json",
-      "X-Requested-With": "XMLHttpRequest"
-    });
-    RestangularProvider.setResponseExtractor(function(response, operation) {
-      if(operation == 'getList') {
-        response.objects.meta = response.meta;
-        return response.objects;
-      } else {
-        return response;
-      }
-    });
 }]);

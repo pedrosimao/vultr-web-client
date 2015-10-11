@@ -1,12 +1,10 @@
 /**
- * apiService - A wrapper around Vultr API calls, using restangular
+ * apiService - A wrapper around Vultr API calls
  */
 vultrWebClient.factory('apiService', [
-  '$q',
-  'Restangular',
+  '$http',
   function(
-    $q,
-    Restangular) {
+    $http) {
 
       var helpers = {};
 
@@ -46,8 +44,10 @@ vultrWebClient.factory('apiService', [
        * Account endpoint (..theres only currently one)
        */
       accounts.list = function(callback) {
-        Restangular.all('accounts').customGET('list', {'api_key': vultrKey})
-          .then(function(response) {
+        $http.get('/proxy/account/info?api_key='+vultrKey)
+          .success(function(response) {
+            console.log(response);
+          }, function(error) {
             console.log(response);
           });
       };
