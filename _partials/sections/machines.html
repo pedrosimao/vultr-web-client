@@ -1,0 +1,99 @@
+<ng-include src="'/_partials/nav.html'"></ng-include>
+<div class="panel">
+    <div class="top machine-list" ng-show="servers">
+        <div class="machine" ng-repeat="server in servers">
+            <div class="machine-top">
+                <div class="machine-status">
+                    <div class="server-status">
+                        <i class="fa fa-power-off {{server.power_status}}"></i>
+                    </div>
+                    <div class="status">
+                        <i class="fa fa-circle {{server.status}}"></i>
+                    </div>
+                </div>
+                <div class="machine-col machine-secrets">
+                    <p class="machine-label">{{server.label}}</p>
+                    <p class="machine-meta machine-ip"><i class="fa fa-cloud offset-right"></i><span class="text">{{server.gateway_v4}}</span> <span >[copy]</span></p>
+                    <p class="machine-meta"><i class="fa fa-lock offset-right"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <i class="fa fa-circle"></i>
+                        <span> [show]</span>
+                    </p>
+                </div>
+                <div class="machine-col machine-details">
+                    <p class="machine-meta"><i class="fa fa-server offset-right"></i>{{server.ram}} / {{server.vcpu_count}} CPUS</p>
+                    <p class="machine-meta"><i class="fa fa-hdd-o offset-right"></i>{{server.disk}}</p>
+                    <p class="machine-meta"><i class="fa fa-linux offset-right"></i>{{server.os}}</p>
+                </div>
+
+                <div class="machine-col machine-usage">
+                    <p class="machine-meta"><i class="fa fa-usd offset-right"></i>${{server.pending_charges}} / ${{server.cost_per_month}}</p>
+                    <p class="machine-meta"><i class="fa fa-exchange fa-rotate-90 offset-right"></i>{{server.current_bandwidth_gb}} / {{server.allowed_bandwidth_gb}} GB</p>
+                    <p class="machine-meta"><i class="fa fa-globe offset-right"></i>{{server.location}}</p>
+                </div>
+            </div>
+            <div class="machine-bottom">
+                <div class="machine-btn">
+                    <i class="fa fa-laptop"></i>
+                    <p class="label">Console</p>
+                </div>
+                <div class="machine-btn">
+                    <i class="fa fa-stop"></i>
+                    <p class="label">Stop</p>
+                </div>
+                <div class="machine-btn">
+                    <i class="fa fa-refresh"></i>
+                    <p class="label">Restart</p>
+                </div>
+                <div class="machine-btn">
+                    <i class="fa fa-download"></i>
+                    <p class="label">Reinstall</p>
+                </div>
+                <div class="machine-btn">
+                    <i class="fa fa-random"></i>
+                    <p class="label">Change OS</p>
+                </div>
+                <div class="machine-btn">
+                    <i class="fa fa-times"></i>
+                    <p class="label">Destroy</p>
+                </div>
+                <div class="machine-btn">
+                    <i class="fa fa-chevron-down"></i>
+                    <p class="label">More Info</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top machine-list loading" ng-show="servers == null">
+        <p class="text-center"><i class="fa fa-spin fa-cog"></i> Loading Machines..</p>
+    </div>
+    <div class="top machine-list loading" ng-show="servers == false">
+        <h2 class="text-center">Error Loading Machines. Please try again</h2>
+    </div>
+    <div class="bottom">
+        <div id="detail">
+            <ul class="tabs" data-tab>
+              <li class="tab-title active"><a href="#panel12"><i class="fa fa-fx fa-info-circle"></i></a></li>
+              <li class="tab-title"><a href="#panel22"><i class="fa fa-fx fa-bar-chart"></i></a></li>
+              <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-cloud"></i></a></li>
+              <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-cog"></i></a></li>
+              <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-camera-retro"></i></a></li>
+              <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-download"></i></a></li>
+            </ul>
+
+        </div>
+    </div>
+</div>

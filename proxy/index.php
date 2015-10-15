@@ -16,7 +16,7 @@ $api = new Vultr($_GET['api_key']);
 
 switch($context) {
 
-    // Account related functions
+    // Account resources
     case 'account':
         switch($action) {
             // Get info on the user's account
@@ -26,6 +26,7 @@ switch($context) {
         }
         break;
 
+    // Vultr App resources
     case 'app':
         switch ($action) {
             case 'list':
@@ -33,4 +34,15 @@ switch($context) {
                 break;
         }
         break;
+
+    // Server resources
+    case 'server':
+        switch ($action) {
+            case 'list':
+                $server_id = (isset($_GET['SUBID'])) ? $_GET['SUBID'] : '';
+                echo json_encode($api->server_list($server_id));
+                break;
+        }
+        break;
+
 }

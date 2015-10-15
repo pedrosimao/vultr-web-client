@@ -371,8 +371,9 @@ class Vultr
    * @return mixed List of servers
    */
 
-  public function server_list()
+  public function server_list($server_id = '')
   {
+    $args = array('SUBID' => $server_id);
     return self::get('server/list');
   }
 

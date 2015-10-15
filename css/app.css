@@ -141,6 +141,17 @@ ul.nav li {
 .pad-left {
   padding-left: 30px;
 }
+.fa.offset-right {
+  margin-right: 10px;
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+}
+.fa.offset-left {
+  margin-left: 5px;
+  display: inline-block;
+  text-align: center;
+}
 #__bs_notify__ {
   top: auto !important;
   bottom: 0 !important;
@@ -164,21 +175,10 @@ ul.nav li {
   width: 100%;
 }
 #nav-main ul li {
-  width: 33.33%;
+  width: 25%;
 }
-#login-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+#login-page {
   background: #000;
-  z-index: 99999;
-  zoom: 1;
-  filter: alpha(opacity=90);
-  -webkit-opacity: 0.9;
-  -moz-opacity: 0.9;
-  opacity: 0.9;
   color: #AAA;
 }
 .panel {
@@ -186,4 +186,102 @@ ul.nav li {
 }
 table {
   max-width: 100%;
+}
+.machine {
+  width: 100%;
+  border: 1px #DDD solid;
+  margin-bottom: 15px;
+  -webkit-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
+}
+.machine .machine-top {
+  padding-left: 40px;
+  position: relative;
+}
+.machine .machine-top:before,
+.machine .machine-top:after {
+  content: "";
+  display: table;
+}
+.machine .machine-top:after {
+  clear: both;
+}
+.machine p {
+  margin: 0;
+  margin-bottom: 4px;
+  font-size: 15px;
+  color: #333;
+}
+.machine p .fa {
+  color: #FFF;
+  text-shadow: 0px 0px 1px #010101;
+  vertical-align: middle;
+}
+.machine p .fa-circle {
+  color: #333;
+  text-shadow: none;
+}
+.machine .machine-status {
+  position: absolute;
+  left: 20px;
+  top: 50px;
+  margin-top: -18px;
+}
+.machine .machine-status .fa {
+  width: 18px;
+  text-align: center;
+}
+.machine .machine-status .fa.running {
+  color: green;
+}
+.machine .machine-status .fa.active {
+  color: green;
+}
+.machine .machine-status .fa.stopped {
+  color: red;
+}
+.machine .machine-label {
+  color: #000;
+}
+.machine .machine-col {
+  width: 33.333%;
+  float: left;
+  padding: 20px;
+}
+.machine .machine-label {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.machine .machine-ip .text {
+  font-weight: bold;
+}
+.machine .fa-circle {
+  font-size: 0.6em;
+}
+.machine .machine-bottom {
+  border-top: 1px #DDD solid;
+}
+.machine .machine-bottom:before,
+.machine .machine-bottom:after {
+  content: "";
+  display: table;
+}
+.machine .machine-bottom:after {
+  clear: both;
+}
+.machine .machine-btn {
+  width: 14.2%;
+  float: left;
+  text-align: center;
+  border-right: 1px #DDD solid;
+  padding: 10px;
+}
+.machine .machine-btn:last-child {
+  border-right: 0;
+}
+.machine .machine-btn .label {
+  margin: 0;
+  margin-top: 2px;
+  font-size: 11px;
 }

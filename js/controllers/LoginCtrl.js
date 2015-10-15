@@ -3,23 +3,27 @@
  *  Controller for the Login overlay
  */
 vultrWebClient.controller('LoginCtrl', [
+  '$scope',
+  '$location',
   'apiService',
-  '$scope', 
   function(
-    api,
-    $scope
+    $scope,
+    $location,
+    api
     ) {
-      if(!api.helpers.getKey()) {
-        $scope.overlayVisible = true;
-      } else {
+
+      // Check if we have a stored key, if so redirect to the machines page
+      if(api.helpers.getKey()) {
+        console.log(api.helpers.getKey());
         api.accounts.list();
-        $scope.overlayVisible = false;
+        api.server.list();
+        $location.path('/machines');
       }
 
       $scope.saveKey = function() {
         api.helpers.setKey($scope.vultrKey);
         api.accounts.list();
+        $location.path('/machines');
         // @TODO: Implement a test API call to check if the key is valid
-        $scope.overlayVisible = false;
       };
   }]);

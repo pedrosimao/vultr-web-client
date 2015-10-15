@@ -3,8 +3,10 @@
  */
 vultrWebClient.factory('apiService', [
   '$http',
+  '$q',
   function(
-    $http) {
+    $http,
+    $q) {
 
       var helpers = {};
 
@@ -32,8 +34,14 @@ vultrWebClient.factory('apiService', [
       helpers.getKey = function() {
         return vultrKey;
       };
-      helpers.setKey = function(vultrKey) {
-        localStorage.setItem("vultr-key", vultrKey);
+      helpers.setKey = function(key) {
+        localStorage.setItem("vultr-key", key);
+        vultrKey = key;
+      };
+      helpers.removeKey = function() {
+        console.warn('Logging out');
+        localStorage.removeItem("vultr-key");
+        vultrKey = null;
       };
 
       /****************************************
@@ -41,9 +49,9 @@ vultrWebClient.factory('apiService', [
        ****************************************/
 
       /**
-       * Account endpoint (..theres only currently one)
+       * Account resource (..theres only currently one)
        */
-      accounts.list = function(callback) {
+      accounts.list = function() {
         $http.get('/proxy/account/info?api_key='+vultrKey)
           .success(function(response) {
             console.log(response);
@@ -52,10 +60,29 @@ vultrWebClient.factory('apiService', [
           });
       };
 
+
+      /**
+       * Server resource
+       *
+       * @param subid - option Server ID to return a single server
+       */
+
+       server.list = function(subid) {
+        var d = $q.defer();
+        $http.get('/proxy/server/list?api_key='+vultrKey+'&?SUBID='+subid)
+          .success(function(response) {
+            d.resolve(response);
+          }, function(error) {
+            d.reject(response);
+          });
+          return d.promise;
+        };
+
       // Public functions
       return {
         helpers: helpers,
-        accounts: accounts
+        accounts: accounts,
+        server: server
       };
 
   }]);

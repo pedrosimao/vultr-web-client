@@ -9,22 +9,32 @@ vultrWebClient.config([
     $routeProvider) {
 
     $routeProvider.
+      when('/', {
+        templateUrl: '_partials/sections/login.html',
+        controller: 'LoginCtrl',
+        label: 'Login'
+      }).
+      when('/logout', {
+        templateUrl: '_partials/sections/login.html',
+        controller: 'LogoutCtrl',
+        label: 'Logout'
+      }).
       when('/machines', {
-        templateUrl: '_partials/machines.html',
+        templateUrl: '_partials/sections/machines.html',
         controller: 'MachinesCtrl',
         label: 'Machine'
       }).
       when('/machines/:machineId', {
-        templateUrl: '_partials/machines.html',
+        templateUrl: '_partials/sections/machines.html',
         controller: 'MachinesCtrl',
         label: 'Machine'
       }).
       when('/deploy', {
-        templateUrl: '_partials/deploy.html',
+        templateUrl: '_partials/sections/deploy.html',
         controller: 'DeployCtrl',
         label: 'Deploy'
       }).
       otherwise({
-        redirectTo: '/machines'
+        redirectTo: '/'
       });
 }]);
