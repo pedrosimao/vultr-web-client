@@ -139,7 +139,7 @@ class Vultr
    * @access public
    * $type int TTL in seconds
    */
-  public $cache_ttl = 3600;
+  public $cache_ttl = 1;
 
 
   /**

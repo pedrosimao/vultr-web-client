@@ -187,6 +187,13 @@ ul.nav li {
 table {
   max-width: 100%;
 }
+.machine-list.loading {
+  padding: 40px 30px;
+  border-bottom: 1px #DDD solid;
+}
+.machine-list p {
+  margin: 0;
+}
 .machine {
   width: 100%;
   border: 1px #DDD solid;
@@ -276,6 +283,7 @@ table {
   text-align: center;
   border-right: 1px #DDD solid;
   padding: 10px;
+  cursor: pointer;
 }
 .machine .machine-btn:last-child {
   border-right: 0;

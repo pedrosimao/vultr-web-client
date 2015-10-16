@@ -1,4 +1,12 @@
-.machine-list {}
+.machine-list {
+    &.loading {
+        padding: 40px 30px;
+        border-bottom: 1px #DDD solid;
+    }
+    p {
+        margin: 0;
+    }
+}
 
 .machine {
     width: 100%;
@@ -79,6 +87,8 @@
         text-align: center;
         border-right: 1px #DDD solid;
         padding: 10px;
+        cursor: pointer;
+
         &:last-child {
             border-right: 0;
         }

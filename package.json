@@ -1,0 +1,14 @@
+{
+    "name" : "vultr-api-client",
+    "version" : "1.0.0", 
+    "dependencies" : { 
+        "gulp" : "",
+        "gulp-watch" : "",
+        "gulp-batch" : "",
+        "gulp-less" : "",
+        "gulp-concat" : "",
+        "gulp-uglify" : "",
+        "gulp-util" : "",
+        "path" : ""
+    } 
+}

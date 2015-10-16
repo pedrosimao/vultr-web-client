@@ -52,31 +52,94 @@ vultrWebClient.factory('apiService', [
        * Account resource (..theres only currently one)
        */
       accounts.list = function() {
-        $http.get('/proxy/account/info?api_key='+vultrKey)
-          .success(function(response) {
+        return $http.get('/proxy/account/info?api_key='+vultrKey)
+          .then(function(response) {
             console.log(response);
           }, function(error) {
-            console.log(response);
+            console.log(error);
           });
       };
 
 
-      /**
-       * Server resource
-       *
-       * @param subid - option Server ID to return a single server
-       */
+      /***********************************
+       * Server resources
+       **********************************/
 
+      /**
+       * server.list() - Get a list of server(s)
+       * @param subid - optional Server ID to return a single server
+       */
        server.list = function(subid) {
         var d = $q.defer();
-        $http.get('/proxy/server/list?api_key='+vultrKey+'&?SUBID='+subid)
-          .success(function(response) {
+        $http.get('/proxy/server/list?api_key='+vultrKey+'&SUBID='+subid)
+          .then(function(response) {
+            d.resolve(response.data);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
+
+      /**
+       * server.destroy() - Destory a server
+       * @param subid - Server ID to destroy
+       */
+       server.destroy = function(subid) {
+        var d = $q.defer();
+        $http.get('/proxy/server/destroy?api_key='+vultrKey+'&SUBID='+subid)
+          .then(function(response) {
             d.resolve(response);
           }, function(error) {
-            d.reject(response);
+            d.reject(error);
           });
-          return d.promise;
-        };
+        return d.promise;
+      };
+
+      /**
+       * server.halt() - Halt a server
+       * @param subid - Server ID to halt
+       */
+       server.halt = function(subid) {
+        var d = $q.defer();
+        $http.get('/proxy/server/halt?api_key='+vultrKey+'&SUBID='+subid)
+          .then(function(response) {
+            d.resolve(response);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
+
+      /**
+       * server.reboot() - Reboot a server
+       * @param subid - Server ID to reboot
+       */
+       server.reboot = function(subid) {
+        var d = $q.defer();
+        $http.get('/proxy/server/reboot?api_key='+vultrKey+'&SUBID='+subid)
+          .then(function(response) {
+            d.resolve(response);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
+
+
+      /**
+       * server.start() - Start a server
+       * @param subid - Server ID to start
+       */
+       server.start = function(subid) {
+        var d = $q.defer();
+        $http.get('/proxy/server/start?api_key='+vultrKey+'&SUBID='+subid)
+          .then(function(response) {
+            d.resolve(response);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
 
       // Public functions
       return {

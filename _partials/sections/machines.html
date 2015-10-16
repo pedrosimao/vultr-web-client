@@ -1,5 +1,5 @@
 <ng-include src="'/_partials/nav.html'"></ng-include>
-<div class="panel">
+<div class="panel" ng-init="machine_list_refresh()">
     <div class="top machine-list" ng-show="servers">
         <div class="machine" ng-repeat="server in servers">
             <div class="machine-top">
@@ -46,17 +46,26 @@
                 </div>
             </div>
             <div class="machine-bottom">
-                <div class="machine-btn">
+                <div class="machine-btn"
+                    ng-click="machine_action_console(server.SUBID)">
                     <i class="fa fa-laptop"></i>
                     <p class="label">Console</p>
                 </div>
-                <div class="machine-btn">
+                <div class="machine-btn"
+                    ng-click="machine_action_start(server.SUBID)"
+                    ng-show="server.power_status == 'stopped'">
+                    <i class="fa fa-play"></i>
+                    <p class="label">Start</p>
+                </div>
+                <div class="machine-btn"
+                    ng-click="machine_action_halt(server.SUBID)"
+                    ng-show="server.power_status == 'running'">
                     <i class="fa fa-stop"></i>
                     <p class="label">Stop</p>
                 </div>
                 <div class="machine-btn">
                     <i class="fa fa-refresh"></i>
-                    <p class="label">Restart</p>
+                    <p class="label">Reboot</p>
                 </div>
                 <div class="machine-btn">
                     <i class="fa fa-download"></i>
@@ -66,7 +75,8 @@
                     <i class="fa fa-random"></i>
                     <p class="label">Change OS</p>
                 </div>
-                <div class="machine-btn">
+                <div class="machine-btn"
+                    ng-click="machine_action_destroy(server.SUBID)">
                     <i class="fa fa-times"></i>
                     <p class="label">Destroy</p>
                 </div>
@@ -77,11 +87,14 @@
             </div>
         </div>
     </div>
-    <div class="top machine-list loading" ng-show="servers == null">
-        <p class="text-center"><i class="fa fa-spin fa-cog"></i> Loading Machines..</p>
+    <div class="top machine-list loading" ng-show="servers_loading">
+        <p class="text-center"><i class="fa fa-spin fa-circle-o-notch"></i> Loading Machines..</p>
     </div>
-    <div class="top machine-list loading" ng-show="servers == false">
-        <h2 class="text-center">Error Loading Machines. Please try again</h2>
+    <div class="top machine-list loading empty" ng-show="servers.length == 0">
+        <p class="text-center"><i class="fa fa-exclamation-circle"></i> You don't have any Machines</p>
+    </div>
+    <div class="top machine-list loading" ng-show="servers_error">
+        <p class="text-center">Error Loading Machines. Please try again</p>
     </div>
     <div class="bottom">
         <div id="detail">
