@@ -160,14 +160,14 @@ class Vultr
   public function __construct($token, $cache_ttl = 3600)
   {
     $this->api_token = $token;
-    $this->account   = self::account_info();
+    /*$this->account   = self::account_info();
     $this->snapshots = self::snapshot_list();
     $this->scripts   = self::startupscript_list();
     $this->regions   = self::regions_list();
     $this->servers   = self::server_list();
     $this->plans     = self::plans_list();
     $this->oses      = self::os_list();
-    $this->ssh_keys  = self::sshkeys_list();
+    $this->ssh_keys  = self::sshkeys_list();*/
   }
 
   /**

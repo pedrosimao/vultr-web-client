@@ -52,7 +52,11 @@ vultrWebClient.factory('apiService', [
        * Account resource (..theres only currently one)
        */
       accounts.list = function() {
-        return $http.get('/proxy/account/info?api_key='+vultrKey)
+        return $http.post('/proxy/account/info',
+            {
+              'api_key': vultrKey
+            }
+          )
           .then(function(response) {
             console.log(response);
           }, function(error) {
@@ -71,7 +75,12 @@ vultrWebClient.factory('apiService', [
        */
        server.list = function(subid) {
         var d = $q.defer();
-        $http.get('/proxy/server/list?api_key='+vultrKey+'&SUBID='+subid)
+        $http.post('/proxy/server/list',
+            {
+              'api_key': vultrKey,
+              'SUBID': subid
+            }
+          )
           .then(function(response) {
             d.resolve(response.data);
           }, function(error) {
@@ -86,7 +95,12 @@ vultrWebClient.factory('apiService', [
        */
        server.destroy = function(subid) {
         var d = $q.defer();
-        $http.get('/proxy/server/destroy?api_key='+vultrKey+'&SUBID='+subid)
+        $http.post('/proxy/server/destroy',
+            {
+              'api_key': vultrKey,
+              'SUBID': subid
+            }
+          )
           .then(function(response) {
             d.resolve(response);
           }, function(error) {
@@ -101,7 +115,12 @@ vultrWebClient.factory('apiService', [
        */
        server.halt = function(subid) {
         var d = $q.defer();
-        $http.get('/proxy/server/halt?api_key='+vultrKey+'&SUBID='+subid)
+        $http.post('/proxy/server/halt',
+            {
+              'api_key': vultrKey,
+              'SUBID': subid
+            }
+          )
           .then(function(response) {
             d.resolve(response);
           }, function(error) {
@@ -116,7 +135,12 @@ vultrWebClient.factory('apiService', [
        */
        server.reboot = function(subid) {
         var d = $q.defer();
-        $http.get('/proxy/server/reboot?api_key='+vultrKey+'&SUBID='+subid)
+        $http.post('/proxy/server/reboot',
+            {
+              'api_key': vultrKey,
+              'SUBID': subid
+            }
+          )
           .then(function(response) {
             d.resolve(response);
           }, function(error) {
@@ -132,7 +156,12 @@ vultrWebClient.factory('apiService', [
        */
        server.start = function(subid) {
         var d = $q.defer();
-        $http.get('/proxy/server/start?api_key='+vultrKey+'&SUBID='+subid)
+        $http.post('/proxy/server/start',
+            {
+              'api_key': vultrKey,
+              'SUBID': subid
+            }
+          )
           .then(function(response) {
             d.resolve(response);
           }, function(error) {

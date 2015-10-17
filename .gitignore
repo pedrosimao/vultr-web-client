@@ -68,3 +68,5 @@ node_modules
 
 # Users Environment Variables
 .lock-wscript
+
+deploy*.php

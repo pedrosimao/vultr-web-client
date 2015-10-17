@@ -5,16 +5,14 @@
  * Used to proxy request from the Angular app to Vultr's API in
  * attempt to bypass CORS restrictions when using plain JavaScript
  */
-
+error_log('init');
 include_once('Vultr.class.php');
-
+$postdata = json_decode(file_get_contents("php://input"));
 // $context and $action to be provided via .htaccess file
 error_reporting(0);
 $context = $_GET['context'];
 $action = $_GET['action'];
-
-$api = new Vultr($_GET['api_key']);
-
+$api = new Vultr($postdata->api_key);
 switch($context) {
 
     // Account resources
@@ -42,7 +40,7 @@ switch($context) {
             // Retrieve list of server(s)
             case 'list':
                 try {
-                    $server_id = (isset($_GET['SUBID'])) ? $_GET['SUBID'] : '';
+                    $server_id = (isset($postdata->SUBID)) ? $postdata->SUBID : '';
                     echo json_encode($api->server_list($server_id));
                 } catch(Exception $ex) {
                     http_response_code(400);
@@ -52,7 +50,7 @@ switch($context) {
             // Destroy a server
             case 'destroy':
                 try {
-                    $server_id = (isset($_GET['SUBID'])) ? $_GET['SUBID'] : '';
+                    $server_id = (isset($postdata->SUBID)) ? $postdata->SUBID : '';
                     echo json_encode($api->destroy($server_id));
                 } catch(Exception $ex) {
                     http_response_code(400);
@@ -62,7 +60,7 @@ switch($context) {
             // Halt a server
             case 'halt':
                 try {
-                    $server_id = (isset($_GET['SUBID'])) ? $_GET['SUBID'] : '';
+                    $server_id = (isset($postdata->SUBID)) ? $postdata->SUBID : '';
                     echo json_encode($api->halt($server_id));
                 } catch(Exception $ex) {
                     http_response_code(400);
@@ -72,7 +70,7 @@ switch($context) {
             // Reboot a server
             case 'reboot':
                 try {
-                    $server_id = (isset($_GET['SUBID'])) ? $_GET['SUBID'] : '';
+                    $server_id = (isset($postdata->SUBID)) ? $postdata->SUBID : '';
                     echo json_encode($api->reboot($server_id));
                 } catch(Exception $ex) {
                     http_response_code(400);
@@ -82,7 +80,7 @@ switch($context) {
             // Start a server
             case 'start':
                 try {
-                    $server_id = (isset($_GET['SUBID'])) ? $_GET['SUBID'] : '';
+                    $server_id = (isset($postdata->SUBID)) ? $postdata->SUBID : '';
                     echo json_encode($api->start($server_id));
                 } catch(Exception $ex) {
                     http_response_code(400);
