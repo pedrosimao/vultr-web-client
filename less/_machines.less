@@ -41,16 +41,17 @@
     .machine-status {
         position: absolute;
         left: 20px;
-        top: 50px;
-        margin-top: -18px;
+        top: 50%;
+        margin-top: -6px;
         .fa {  
             width: 18px;
             text-align: center;
-            &.running {
-                color: green;
-            }
+            &.running,
             &.active {
                 color: green;
+            }
+            &.pending {
+                color: orange;
             }
             &.stopped {
                 color: red;
@@ -80,6 +81,76 @@
     .machine-bottom {
         .clearfix();
         border-top: 1px #DDD solid;
+
+        &.status-pending,
+        &.status-starting,
+        &.status-halting,
+        &.status-rebooting,
+        &.status-reinstalling,
+        &.status-changing-os,
+        &.status-destorying {
+            .action {
+                .fa,
+                .label {
+                    color: #EEE;
+                }
+            }
+        }
+
+        &.status-starting {
+            .start {
+                .fa,
+                .label {
+                    transform: all 1s;
+                    animation: flash-status 2s infinite;
+                }
+            }
+        }
+        &.status-halting {
+            .halt {
+                .fa,
+                .label {
+                    transform: all 1s;
+                    animation: flash-status 2s infinite;
+                }
+            }
+        }
+        &.status-rebooting {
+            .reboot {
+                .fa,
+                .label {
+                    transform: all 1s;
+                    animation: flash-status 2s infinite;
+                }
+            }
+        }
+        &.status-reinstalling {
+            .reinstall {
+                .fa,
+                .label {
+                    transform: all 1s;
+                    animation: flash-status 2s infinite;
+                }
+            }
+        }
+        &.status-changing-os {
+            .change-is {
+                .fa,
+                .label {
+                    transform: all 1s;
+                    animation: flash-status 2s infinite;
+                }
+            }
+        }
+        &.status-destorying {
+            .destroy {
+                .fa,
+                .label {
+                    transform: all 1s;
+                    animation: flash-status 2s infinite;
+                }
+            }
+        }
     }
     .machine-btn {
         width: 14.2%;
@@ -88,15 +159,23 @@
         border-right: 1px #DDD solid;
         padding: 10px;
         cursor: pointer;
-
+        
         &:last-child {
             border-right: 0;
         }
-
+        .fa,
+        .label {
+            transition: all 0.5s;
+        }
         .label {
             margin: 0;
             margin-top: 2px;
             font-size: 11px;
         }
     }
+}
+@keyframes flash-status {
+    0% {color: #EEE;}
+    50% {color: #AAA;}
+    100% {color: #EEE;}
 }

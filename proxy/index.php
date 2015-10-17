@@ -77,6 +77,16 @@ switch($context) {
                 }
                 break;
 
+            // Reinstall a server
+            case 'reinstall':
+                try {
+                    $server_id = (isset($postdata->SUBID)) ? $postdata->SUBID : '';
+                    echo json_encode($api->reinstall($server_id));
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+
             // Start a server
             case 'start':
                 try {

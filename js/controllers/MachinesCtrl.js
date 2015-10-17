@@ -34,6 +34,15 @@ vultrWebClient.controller('MachinesCtrl', [
       );
     };
 
+    $scope.machine_action_allowed = function(subid) {
+      return $scope.servers[subid].status == 'active';
+    };
+
+    $scope.machine_action_confirm = function(subid) {
+      if($scope.machine_action_allowed(subid)) {
+        return confirm('Are you sure?');
+      }
+    };
 
     /*************************************
      * Server action/management functions
@@ -44,34 +53,57 @@ vultrWebClient.controller('MachinesCtrl', [
     };
      
     $scope.machine_action_destroy = function(subid) {
-      console.warn('Destroying ' + subid);
-      api.server.destroy(subid)
-        .then(function() {
-          $scope.machine_list_refresh();
-        });
+      if($scope.machine_action_confirm(subid)) {
+        $scope.servers[subid].status = 'destorying';
+        console.warn('Destroying ' + subid);
+        api.server.destroy(subid)
+          .then(function() {
+            $scope.machine_list_refresh();
+          });
+      }
     };
 
     $scope.machine_action_halt = function(subid) {
-      console.warn('Halting ' + subid);
-      api.server.halt(subid)
-        .then(function() {
-          $scope.machine_list_refresh();
-        });
+      if($scope.machine_action_confirm(subid)) {
+        $scope.servers[subid].status = 'halting';
+        console.warn('Halting ' + subid);
+        api.server.halt(subid)
+          .then(function() {
+            $scope.machine_list_refresh();
+          });
+      }
     };
 
-    $scope.machine_action_restart = function(subid) {
-      console.warn('Restarting ' + subid);
-      api.server.restart(subid)
-        .then(function() {
-          $scope.machine_list_refresh();
-        });
+    $scope.machine_action_reboot = function(subid) {
+      if($scope.machine_action_confirm(subid)) {
+        $scope.servers[subid].status = 'rebooting';
+        console.warn('Restarting ' + subid);
+        api.server.reboot(subid)
+          .then(function() {
+            $scope.machine_list_refresh();
+          });
+      }
+    };
+
+    $scope.machine_action_reinstall = function(subid) {
+      if($scope.machine_action_confirm(subid)) {
+        $scope.servers[subid].status = 'reinstalling';
+        console.warn('Reinstalling ' + subid);
+        api.server.reinstall(subid)
+          .then(function() {
+            $scope.machine_list_refresh();
+          });
+      }
     };
 
     $scope.machine_action_start = function(subid) {
-      console.warn('Starting ' + subid);
-      api.server.start(subid)
-        .then(function() {
-          $scope.machine_list_refresh();
-        });
+      if($scope.machine_action_confirm(subid)) {
+        $scope.servers[subid].status = 'starting';
+        console.warn('Starting ' + subid);
+        api.server.start(subid)
+          .then(function() {
+            $scope.machine_list_refresh();
+          });
+      }
     };
   }]);

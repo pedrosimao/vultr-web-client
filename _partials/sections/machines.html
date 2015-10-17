@@ -4,12 +4,8 @@
         <div class="machine" ng-repeat="server in servers">
             <div class="machine-top">
                 <div class="machine-status">
-                    <div class="server-status">
-                        <i class="fa fa-power-off {{server.power_status}}"></i>
-                    </div>
-                    <div class="status">
-                        <i class="fa fa-circle {{server.status}}"></i>
-                    </div>
+                    <i class="fa fa-power-off {{server.power_status}}" ng-show="machine_action_allowed(server.SUBID)"></i>
+                    <i class="fa fa-spinner fa-pulse pending" ng-hide="machine_action_allowed(server.SUBID)"></i>
                 </div>
                 <div class="machine-col machine-secrets">
                     <p class="machine-label">{{server.label}}</p>
@@ -45,42 +41,44 @@
                     <p class="machine-meta"><i class="fa fa-globe offset-right"></i>{{server.location}}</p>
                 </div>
             </div>
-            <div class="machine-bottom">
-                <div class="machine-btn"
+            <div class="machine-bottom status-{{server.status}}">
+                <div class="machine-btn console action"
                     ng-click="machine_action_console(server.SUBID)">
                     <i class="fa fa-laptop"></i>
                     <p class="label">Console</p>
                 </div>
-                <div class="machine-btn"
+                <div class="machine-btn action start"
                     ng-click="machine_action_start(server.SUBID)"
                     ng-show="server.power_status == 'stopped'">
                     <i class="fa fa-play"></i>
                     <p class="label">Start</p>
                 </div>
-                <div class="machine-btn"
+                <div class="machine-btn action halt"
                     ng-click="machine_action_halt(server.SUBID)"
                     ng-show="server.power_status == 'running'">
                     <i class="fa fa-stop"></i>
                     <p class="label">Stop</p>
                 </div>
-                <div class="machine-btn">
+                <div class="machine-btn action reboot"
+                    ng-click="machine_action_reboot(server.SUBID)">
                     <i class="fa fa-refresh"></i>
                     <p class="label">Reboot</p>
                 </div>
-                <div class="machine-btn">
+                <div class="machine-btn action reinstall"
+                    ng-click="machine_action_reinstall(server.SUBID)">
                     <i class="fa fa-download"></i>
                     <p class="label">Reinstall</p>
                 </div>
-                <div class="machine-btn">
+                <div class="machine-btn action change-os">
                     <i class="fa fa-random"></i>
                     <p class="label">Change OS</p>
                 </div>
-                <div class="machine-btn"
+                <div class="machine-btn action destroy"
                     ng-click="machine_action_destroy(server.SUBID)">
                     <i class="fa fa-times"></i>
                     <p class="label">Destroy</p>
                 </div>
-                <div class="machine-btn">
+                <div class="machine-btn more-info">
                     <i class="fa fa-chevron-down"></i>
                     <p class="label">More Info</p>
                 </div>

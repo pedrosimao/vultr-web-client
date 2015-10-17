@@ -149,6 +149,25 @@ vultrWebClient.factory('apiService', [
         return d.promise;
       };
 
+      /**
+       * server.reinstall() - Reinstall a server
+       * @param subid - Server ID to reinstall
+       */
+       server.reinstall = function(subid) {
+        var d = $q.defer();
+        $http.post('/proxy/server/reinstall',
+            {
+              'api_key': vultrKey,
+              'SUBID': subid
+            }
+          )
+          .then(function(response) {
+            d.resolve(response);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
 
       /**
        * server.start() - Start a server

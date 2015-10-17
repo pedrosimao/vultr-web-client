@@ -232,18 +232,19 @@ table {
 .machine .machine-status {
   position: absolute;
   left: 20px;
-  top: 50px;
-  margin-top: -18px;
+  top: 50%;
+  margin-top: -6px;
 }
 .machine .machine-status .fa {
   width: 18px;
   text-align: center;
 }
-.machine .machine-status .fa.running {
-  color: green;
-}
+.machine .machine-status .fa.running,
 .machine .machine-status .fa.active {
   color: green;
+}
+.machine .machine-status .fa.pending {
+  color: orange;
 }
 .machine .machine-status .fa.stopped {
   color: red;
@@ -277,6 +278,52 @@ table {
 .machine .machine-bottom:after {
   clear: both;
 }
+.machine .machine-bottom.status-pending .action .fa,
+.machine .machine-bottom.status-starting .action .fa,
+.machine .machine-bottom.status-halting .action .fa,
+.machine .machine-bottom.status-rebooting .action .fa,
+.machine .machine-bottom.status-reinstalling .action .fa,
+.machine .machine-bottom.status-changing-os .action .fa,
+.machine .machine-bottom.status-destorying .action .fa,
+.machine .machine-bottom.status-pending .action .label,
+.machine .machine-bottom.status-starting .action .label,
+.machine .machine-bottom.status-halting .action .label,
+.machine .machine-bottom.status-rebooting .action .label,
+.machine .machine-bottom.status-reinstalling .action .label,
+.machine .machine-bottom.status-changing-os .action .label,
+.machine .machine-bottom.status-destorying .action .label {
+  color: #EEE;
+}
+.machine .machine-bottom.status-starting .start .fa,
+.machine .machine-bottom.status-starting .start .label {
+  transform: all 1s;
+  animation: flash-status 2s infinite;
+}
+.machine .machine-bottom.status-halting .halt .fa,
+.machine .machine-bottom.status-halting .halt .label {
+  transform: all 1s;
+  animation: flash-status 2s infinite;
+}
+.machine .machine-bottom.status-rebooting .reboot .fa,
+.machine .machine-bottom.status-rebooting .reboot .label {
+  transform: all 1s;
+  animation: flash-status 2s infinite;
+}
+.machine .machine-bottom.status-reinstalling .reinstall .fa,
+.machine .machine-bottom.status-reinstalling .reinstall .label {
+  transform: all 1s;
+  animation: flash-status 2s infinite;
+}
+.machine .machine-bottom.status-changing-os .change-is .fa,
+.machine .machine-bottom.status-changing-os .change-is .label {
+  transform: all 1s;
+  animation: flash-status 2s infinite;
+}
+.machine .machine-bottom.status-destorying .destroy .fa,
+.machine .machine-bottom.status-destorying .destroy .label {
+  transform: all 1s;
+  animation: flash-status 2s infinite;
+}
 .machine .machine-btn {
   width: 14.2%;
   float: left;
@@ -288,8 +335,23 @@ table {
 .machine .machine-btn:last-child {
   border-right: 0;
 }
+.machine .machine-btn .fa,
+.machine .machine-btn .label {
+  transition: all 0.5s;
+}
 .machine .machine-btn .label {
   margin: 0;
   margin-top: 2px;
   font-size: 11px;
+}
+@keyframes flash-status {
+  0% {
+    color: #EEE;
+  }
+  50% {
+    color: #AAA;
+  }
+  100% {
+    color: #EEE;
+  }
 }
