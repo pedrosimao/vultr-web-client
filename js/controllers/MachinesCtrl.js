@@ -106,4 +106,16 @@ vultrWebClient.controller('MachinesCtrl', [
           });
       }
     };
+
+
+
+    $scope.machine_more = function(subid) {
+      if(!$scope.servers[subid].more_info) {
+        $scope.servers[subid].more_info = true;
+      } else {
+        $scope.servers[subid].more_info = false;
+      }
+    };
+
+
   }]);

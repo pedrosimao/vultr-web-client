@@ -19,7 +19,7 @@
         <!--<![endif]-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/app.css">
-        <script src="js/modernizr.js"></script>
+        <script src="js/lib/modernizr.js"></script>
     </head>
     <body ng-app="vultrWebClient">
         <!--[if lt IE 8]>
@@ -29,14 +29,16 @@
         <div id="main" ng-view class="root-view"></div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
-        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.4/angular-route.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-animate.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
 
         <script src="js/app.js"></script>
+        <script src="js/animations/animations.js"></script>
         <script src="js/services/apiService.js"></script>
         <script src="js/controllers/LoginCtrl.js"></script>
-        <script src="js/controllers/LogoutCtrl.js"></script>
+        <script src="js/controllers/LoginCtrl.js"></script>
         <script src="js/controllers/MachinesCtrl.js"></script>
+        <script src="js/controllers/DeployCtrl.js"></script>
     </body>
 </html>

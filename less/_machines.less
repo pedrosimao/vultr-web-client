@@ -1,7 +1,7 @@
 .machine-list {
     &.loading {
         padding: 40px 30px;
-        border-bottom: 1px #DDD solid;
+        border-bottom: 1px @theme-border-color-pri solid;
     }
     p {
         margin: 0;
@@ -10,12 +10,8 @@
 
 .machine {
     width: 100%;
-    border: 1px #DDD solid;
+    border: 1px @theme-border-color-pri solid;
     margin-bottom: 15px;
-    -webkit-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75);
-    box-shadow: 0px 0px 10px -2px rgba(0,0,0,0.75);
-
     .machine-top {
         .clearfix();
         padding-left: 40px;
@@ -40,15 +36,16 @@
 
     .machine-status {
         position: absolute;
-        left: 20px;
+        left: 16px;
         top: 50%;
-        margin-top: -6px;
+        margin-top: -12px;
         .fa {  
-            width: 18px;
+            font-size: 1.8em;
             text-align: center;
             &.running,
             &.active {
                 color: green;
+                cursor: pointer;
             }
             &.pending {
                 color: orange;
@@ -80,8 +77,8 @@
     }
     .machine-bottom {
         .clearfix();
-        border-top: 1px #DDD solid;
-
+        border-top: 1px @theme-border-color-pri solid;
+        padding: 0;
         &.status-pending,
         &.status-starting,
         &.status-halting,
@@ -153,24 +150,42 @@
         }
     }
     .machine-btn {
-        width: 14.2%;
+        width: 16.6666%;
         float: left;
         text-align: center;
-        border-right: 1px #DDD solid;
+        border-right: 1px @theme-border-color-pri solid;
         padding: 10px;
         cursor: pointer;
-        
         &:last-child {
             border-right: 0;
         }
         .fa,
         .label {
-            transition: all 0.5s;
+            transition: all 0.3s;
         }
         .label {
             margin: 0;
             margin-top: 2px;
             font-size: 11px;
+        }
+
+        &.more-info {
+            &.active {
+                .fa {
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+    }
+
+    .machine-more {
+        height: auto;
+        overflow: hidden;
+        height: 0;
+        
+        .inner {
+            border-top: 1px solid #AAA;
+            .clearfix();
         }
     }
 }

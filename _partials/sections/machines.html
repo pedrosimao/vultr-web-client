@@ -1,7 +1,8 @@
 <ng-include src="'/_partials/nav.html'"></ng-include>
-<div class="panel" ng-init="machine_list_refresh()">
+<div class="page" ng-init="machine_list_refresh()">
+    <h4 class="text-center title">My Machines</h4>
     <div class="top machine-list" ng-show="servers">
-        <div class="machine" ng-repeat="server in servers">
+        <div class="machine panel" ng-repeat="server in servers">
             <div class="machine-top">
                 <div class="machine-status">
                     <i class="fa fa-power-off {{server.power_status}}" ng-show="machine_action_allowed(server.SUBID)"></i>
@@ -30,9 +31,9 @@
                     </p>
                 </div>
                 <div class="machine-col machine-details">
-                    <p class="machine-meta"><i class="fa fa-server offset-right"></i>{{server.ram}} / {{server.vcpu_count}} CPUS</p>
+                    <p class="machine-meta"><i class="fa fa-server offset-right"></i>{{server.ram}} / {{server.vcpu_count}} CPUS [change]</p>
                     <p class="machine-meta"><i class="fa fa-hdd-o offset-right"></i>{{server.disk}}</p>
-                    <p class="machine-meta"><i class="fa fa-linux offset-right"></i>{{server.os}}</p>
+                    <p class="machine-meta"><i class="fa fa-linux offset-right"></i>{{server.os}} [change]</p>
                 </div>
 
                 <div class="machine-col machine-usage">
@@ -41,70 +42,91 @@
                     <p class="machine-meta"><i class="fa fa-globe offset-right"></i>{{server.location}}</p>
                 </div>
             </div>
-            <div class="machine-bottom status-{{server.status}}">
-                <div class="machine-btn console action"
+            <ul class="machine-bottom nav status-{{server.status}}">
+                <li class="machine-btn console action"
                     ng-click="machine_action_console(server.SUBID)">
                     <i class="fa fa-laptop"></i>
                     <p class="label">Console</p>
-                </div>
-                <div class="machine-btn action start"
+                </li>
+                <li class="machine-btn action start"
                     ng-click="machine_action_start(server.SUBID)"
                     ng-show="server.power_status == 'stopped'">
                     <i class="fa fa-play"></i>
                     <p class="label">Start</p>
-                </div>
-                <div class="machine-btn action halt"
+                </li>
+                <li class="machine-btn action halt"
                     ng-click="machine_action_halt(server.SUBID)"
                     ng-show="server.power_status == 'running'">
                     <i class="fa fa-stop"></i>
                     <p class="label">Stop</p>
-                </div>
-                <div class="machine-btn action reboot"
+                </li>
+                <li class="machine-btn action reboot"
                     ng-click="machine_action_reboot(server.SUBID)">
                     <i class="fa fa-refresh"></i>
                     <p class="label">Reboot</p>
-                </div>
-                <div class="machine-btn action reinstall"
+                </li>
+                <li class="machine-btn action reinstall"
                     ng-click="machine_action_reinstall(server.SUBID)">
                     <i class="fa fa-download"></i>
                     <p class="label">Reinstall</p>
-                </div>
-                <div class="machine-btn action change-os">
-                    <i class="fa fa-random"></i>
-                    <p class="label">Change OS</p>
-                </div>
-                <div class="machine-btn action destroy"
+                </li>
+                <li class="machine-btn action destroy"
                     ng-click="machine_action_destroy(server.SUBID)">
                     <i class="fa fa-times"></i>
                     <p class="label">Destroy</p>
-                </div>
-                <div class="machine-btn more-info">
+                </li>
+                <li class="machine-btn more-info"
+                    ng-class="{active: server.more_info}"
+                    ng-click="machine_more(server.SUBID)">
                     <i class="fa fa-chevron-down"></i>
                     <p class="label">More Info</p>
+                </li>
+            </ul>
+
+            <div class="machine-more ng-hide-animate" ng-show="server.more_info">
+                <div class="inner">
+                    <ul class="nav info-top">
+                        <li class="machine-btn info usage">
+                            <i class="fa fa-bar-chart"></i>
+                            <p class="label">Usage</p>
+                        </li>
+                        <li class="machine-btn info network">
+                            <i class="fa fa-cloud"></i>
+                            <p class="label">Network</p>
+                        </li>
+                        <li class="machine-btn info snapshots">
+                            <i class="fa fa-camera-retro"></i>
+                            <p class="label">Snapshots</p>
+                        </li>
+                        <li class="machine-btn info snapshots">
+                            <i class="fa fa-cloud-download"></i>
+                            <p class="label">Backups</p>
+                        </li>
+                        <li class="machine-btn info snapshots">
+                            <i class="fa fa-bomb"></i>
+                            <p class="label">DDOS</p>
+                        </li>
+                        <li class="machine-btn info snapshots">
+                            <i class="fa fa-camera-retro"></i>
+                            <p class="label">Custom ISO</p>
+                        </li>
+                    </ul>
+                    <div class="info-bottom">
+                        <div class="info-panel usage">
+                            <p>Defaut panel: Usage. Yet to be implemented..</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="top machine-list loading" ng-show="servers_loading">
-        <p class="text-center"><i class="fa fa-spin fa-circle-o-notch"></i> Loading Machines..</p>
+    <div class="top machine machine-list loading panel" ng-show="servers_loading">
+        <p class="text-center"><i class="fa fa-spin fa-circle-o-notch"></i> Loading..</p>
     </div>
-    <div class="top machine-list loading empty" ng-show="servers.length == 0">
+    <div class="top machine-list loading empty panel" ng-show="servers.length == 0">
         <p class="text-center"><i class="fa fa-exclamation-circle"></i> You don't have any Machines</p>
     </div>
-    <div class="top machine-list loading" ng-show="servers_error">
+    <div class="top machine-list loading panel" ng-show="servers_error">
         <p class="text-center">Error Loading Machines. Please try again</p>
-    </div>
-    <div class="bottom">
-        <div id="detail">
-            <ul class="tabs" data-tab>
-              <li class="tab-title active"><a href="#panel12"><i class="fa fa-fx fa-info-circle"></i></a></li>
-              <li class="tab-title"><a href="#panel22"><i class="fa fa-fx fa-bar-chart"></i></a></li>
-              <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-cloud"></i></a></li>
-              <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-cog"></i></a></li>
-              <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-camera-retro"></i></a></li>
-              <li class="tab-title"><a href="#panel32"><i class="fa fa-fx fa-download"></i></a></li>
-            </ul>
-
-        </div>
     </div>
 </div>

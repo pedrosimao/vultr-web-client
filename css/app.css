@@ -14,6 +14,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
+  background-color: #25aacb;
 }
 h1 {
   display: none !important;
@@ -34,6 +35,9 @@ h3 {
 }
 h4 {
   font-size: 28px;
+}
+h4.title {
+  color: #FFF;
 }
 h5 {
   font-size: 18px;
@@ -103,10 +107,10 @@ a {
   color: #333;
 }
 .text-sec {
-  color: #AAA;
+  color: #25aacb;
 }
 .text-tri {
-  color: #FFF;
+  color: #EFEFEF;
 }
 .cf:before,
 .cf:after {
@@ -152,6 +156,24 @@ ul.nav li {
   display: inline-block;
   text-align: center;
 }
+.title {
+  margin: 30px 0;
+}
+ul.nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.nav li {
+  margin: 0;
+  padding: 0;
+}
+.panel {
+  background: #EFEFEF;
+  -webkit-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
+}
 #__bs_notify__ {
   top: auto !important;
   bottom: 0 !important;
@@ -161,6 +183,7 @@ ul.nav li {
 #main {
   width: 100%;
   padding-top: 48px;
+  background-color: #25aacb;
 }
 #nav-main {
   position: fixed;
@@ -168,8 +191,7 @@ ul.nav li {
   left: 0;
   right: 0;
   width: 100%;
-  border-bottom: 1px solid #333;
-  background: #FFF;
+  border-bottom: 1px solid #DDD;
 }
 #nav-main ul {
   width: 100%;
@@ -179,9 +201,9 @@ ul.nav li {
 }
 #login-page {
   background: #000;
-  color: #AAA;
+  color: #25aacb;
 }
-.panel {
+.page {
   padding: 15px;
 }
 table {
@@ -198,9 +220,6 @@ table {
   width: 100%;
   border: 1px #DDD solid;
   margin-bottom: 15px;
-  -webkit-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
-  box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.75);
 }
 .machine .machine-top {
   padding-left: 40px;
@@ -231,17 +250,18 @@ table {
 }
 .machine .machine-status {
   position: absolute;
-  left: 20px;
+  left: 16px;
   top: 50%;
-  margin-top: -6px;
+  margin-top: -12px;
 }
 .machine .machine-status .fa {
-  width: 18px;
+  font-size: 1.8em;
   text-align: center;
 }
 .machine .machine-status .fa.running,
 .machine .machine-status .fa.active {
   color: green;
+  cursor: pointer;
 }
 .machine .machine-status .fa.pending {
   color: orange;
@@ -269,6 +289,7 @@ table {
 }
 .machine .machine-bottom {
   border-top: 1px #DDD solid;
+  padding: 0;
 }
 .machine .machine-bottom:before,
 .machine .machine-bottom:after {
@@ -325,7 +346,7 @@ table {
   animation: flash-status 2s infinite;
 }
 .machine .machine-btn {
-  width: 14.2%;
+  width: 16.6666%;
   float: left;
   text-align: center;
   border-right: 1px #DDD solid;
@@ -337,12 +358,31 @@ table {
 }
 .machine .machine-btn .fa,
 .machine .machine-btn .label {
-  transition: all 0.5s;
+  transition: all 0.3s;
 }
 .machine .machine-btn .label {
   margin: 0;
   margin-top: 2px;
   font-size: 11px;
+}
+.machine .machine-btn.more-info.active .fa {
+  transform: rotate(-180deg);
+}
+.machine .machine-more {
+  height: auto;
+  overflow: hidden;
+  height: 0;
+}
+.machine .machine-more .inner {
+  border-top: 1px solid #AAA;
+}
+.machine .machine-more .inner:before,
+.machine .machine-more .inner:after {
+  content: "";
+  display: table;
+}
+.machine .machine-more .inner:after {
+  clear: both;
 }
 @keyframes flash-status {
   0% {
