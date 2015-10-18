@@ -12,6 +12,12 @@ vultrWebClient.controller('DeployCtrl', [
     api) {
 
     // @TODO: check if logged in first..
+    var default_plan_list = [
+      {
+        'VPSPLANID': 'loading',
+        'name': 'Loading Plans..'
+      }
+    ];
     $scope.show_additional = false;
     $scope.data = {
       plan_type: null,
@@ -33,12 +39,6 @@ vultrWebClient.controller('DeployCtrl', [
       {
         'OSID': 'loading',
         'name': 'Loading OSes..'
-      }
-    ];
-    $scope.plans = [
-      {
-        'VPSPLANID': 'loading',
-        'name': 'Loading Plans..'
       }
     ];
     $scope.sshkeys = [
@@ -71,7 +71,7 @@ vultrWebClient.controller('DeployCtrl', [
         'name': 'DDOS Protection'
       }
     ];
-    $scope.plans_all = [];
+    $scope.plans = default_plan_list;
 
 
     $scope.set_plan_type = function(type) {
@@ -79,28 +79,6 @@ vultrWebClient.controller('DeployCtrl', [
       $scope.regions_list_refresh();
       $scope.os_list_refresh();
       $scope.plan_list_refresh();
-    };
-
-    $scope.filter_plan_list = function() {
-      return;
-      console.log($scope.plans);
-      // Filter out the plan list to only show those available to the current instance type and region
-      var plans = {};
-      for(var i in $scope.plans_all) {
-        var plan = $scope.plans_all[i];
-        console.log(plan.plan_type);
-        // filter out plans based on our instance type
-        if($scope.data.plan_type == plan.plan_type) {
-          if($scope.data.region !== null && $scope.data.region != 'loading') {
-            for(var x=0; x<plan.available_locations.length; x++) {
-              if(plan.available_locations[x] == $scope.data.region) {
-                plans[i] = plan;
-              }
-            }
-          }
-        }
-      }
-      $scope.plans = plans;
     };
 
     $scope.set_additional = function() {
@@ -121,6 +99,7 @@ vultrWebClient.controller('DeployCtrl', [
      * Change handlers for Chosen dropdowns
      ******************************************/
     $scope.select_region_changed = function() {
+      $scope.plan_list_refresh();
       $scope.set_additional();
     };
 
@@ -219,21 +198,28 @@ vultrWebClient.controller('DeployCtrl', [
 
     $scope.plan_list_refresh = function() {
       // retrieve the list of plans from Vultr
+      $scope.plans = default_plan_list;
+      $scope.data.plan = 'loading';
       api.plans.list().then(
         function(plans) {
+          $scope.data.plan = null;
+          $scope.plans = {};
           if(plans === null) {
             return;
           }
-          $scope.plans_all = plans;
-          $scope.plans = plans;
-          // create a friendly title for the plans list
-          for(var i in $scope.plans) {
-            var plan = $scope.plans[i];
-            plan.name = plan.name.replace(/,/g, ', ');
-            plan.name = plan.name.replace(/.00/g, '');
-            $scope.plans[i].name = plan.name;
+
+          for(var i in plans) {
+            // filter out plans that aren't in our our selected options
+            var plan = plans[i];
+            if(
+              ($scope.data.plan_type !== null && $scope.data.plan_type != plan.plan_type) &&
+              ($scope.data.region !== null && plan.available_locations.indexOf(parseInt($scope.data.region)) != -1)
+              ) {
+                plan.name = plan.name.replace(/,/g, ', ');
+                plan.name = plan.name.replace(/.00/g, '');
+                $scope.plans[i] = plan;
+            }
           }
-          $scope.filter_plan_list();
         },
         function(error) {
           console.log(error);
