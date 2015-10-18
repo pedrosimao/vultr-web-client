@@ -21,7 +21,7 @@ vultrWebClient.factory('apiService', [
       var regions = {};
       var server = {};
       var snapshot = {};
-      var ssh = {};
+      var sshkey = {};
       var startupscript = {};
 
 
@@ -64,11 +64,77 @@ vultrWebClient.factory('apiService', [
           });
       };
 
+      /***********************************
+       * OS resources
+       **********************************/
+       /**
+        * os.list() - Get a list of oses
+        */
+       os.list = function() {
+        var d = $q.defer();
+        $http.post('/proxy/os/list',
+            {
+              'api_key': vultrKey
+            }
+          )
+          .then(function(response) {
+            d.resolve(response.data);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
+
+      /***********************************
+       * Plans resources
+       **********************************/
+       /**
+        * plans.list() - Get a list of oses
+        */
+       plans.list = function() {
+        var d = $q.defer();
+        $http.post('/proxy/plans/list',
+            {
+              'api_key': vultrKey
+            }
+          )
+          .then(function(response) {
+            d.resolve(response.data);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
 
       /***********************************
        * Server resources
        **********************************/
 
+      /**
+       * server.create() - Create a new server
+       * @param dcid - Location/Regions ID to deploy instance to
+       * @param osid - Operating System ID to use for server install
+       * @param vpsplanid - VPS Plan ID to use for server type
+       * @param optional_params - Optional additional params
+       */
+       server.create = function(dcid, osid, vpsplanid, label, optional_params) {
+        var d = $q.defer();
+        $http.post('/proxy/server/create',
+            {
+              'api_key': vultrKey,
+              'DCID': dcid,
+              'OSID': osid,
+              'VPSPLANID': vpsplanid,
+              'label': label
+            }
+          )
+          .then(function(response) {
+            d.resolve(response);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
       /**
        * server.list() - Get a list of server(s)
        * @param subid - optional Server ID to return a single server
@@ -189,11 +255,84 @@ vultrWebClient.factory('apiService', [
         return d.promise;
       };
 
+
+      /***********************************
+       * SSH Key resources
+       **********************************/
+       /**
+        * sshkey.list() - Get a list of SSH Keys
+        */
+       sshkey.list = function() {
+        var d = $q.defer();
+        $http.post('/proxy/sshkey/list',
+            {
+              'api_key': vultrKey
+            }
+          )
+          .then(function(response) {
+            d.resolve(response.data);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
+
+      /***********************************
+       * Startup Script resources
+       **********************************/
+
+      /**
+       * startupscript.list() - Get a list of startup scripts
+       */
+       startupscript.list = function() {
+        var d = $q.defer();
+        $http.post('/proxy/startupscript/list',
+            {
+              'api_key': vultrKey
+            }
+          )
+          .then(function(response) {
+            d.resolve(response.data);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
+
+
+      /***********************************
+       * Region resources
+       **********************************/
+       /**
+       * regions.list() - Get a list of regions
+       */
+       regions.list = function() {
+        var d = $q.defer();
+        $http.post('/proxy/regions/list',
+            {
+              'api_key': vultrKey
+            }
+          )
+          .then(function(response) {
+            d.resolve(response.data);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
+
+
+
       // Public functions
       return {
         helpers: helpers,
         accounts: accounts,
-        server: server
+        os: os,
+        plans: plans,
+        server: server,
+        sshkey: sshkey,
+        startupscript: startupscript,
+        regions: regions
       };
 
   }]);

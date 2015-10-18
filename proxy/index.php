@@ -34,9 +34,53 @@ switch($context) {
         }
         break;
 
+    // OS resources
+    case 'os':
+        switch ($action) {
+            // Retrieve list of operating systems
+            case 'list':
+                try {
+                    echo json_encode($api->os_list());
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+        }
+        break;
+
+    // Plans resources
+    case 'plans':
+        switch ($action) {
+            // Retrieve list of server plans
+            case 'list':
+                try {
+                    echo json_encode($api->plans_list());
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+        }
+        break;
+
     // Server resources
     case 'server':
         switch ($action) {
+            // Create a server
+            case 'create':
+                try {
+                    $config = array(
+                        'DCID' => (isset($postdata->DCID)) ? $postdata->DCID : '',
+                        'VPSPLANID' => (isset($postdata->VPSPLANID)) ? $postdata->VPSPLANID : '',
+                        'OSID' => (isset($postdata->OSID)) ? $postdata->OSID : '',
+                        'label' => (isset($postdata->label)) ? $postdata->label : '',
+                    );
+                    $response = json_encode($api->create($config));
+                    error_log($response);
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+
             // Retrieve list of server(s)
             case 'list':
                 try {
@@ -92,6 +136,49 @@ switch($context) {
                 try {
                     $server_id = (isset($postdata->SUBID)) ? $postdata->SUBID : '';
                     echo json_encode($api->start($server_id));
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+        }
+        break;
+
+    // SSH Key resources
+    case 'sshkey':
+        switch ($action) {
+            // Retrieve list of operating systems
+            case 'list':
+                try {
+                    echo json_encode($api->sshkeys_list());
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+        }
+        break;
+
+    // Startup Script resources
+    case 'startupscript':
+        switch ($action) {
+            // Retrieve list of operating systems
+            case 'list':
+                try {
+                    echo json_encode($api->startupscript_list());
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+        }
+        break;
+
+    // Regions resources
+    case 'regions':
+        error_log('Regions');
+        switch ($action) {
+            // Retrieve list of server(s)
+            case 'list':
+                try {
+                    echo json_encode($api->regions_list());
                 } catch(Exception $ex) {
                     http_response_code(400);
                 }

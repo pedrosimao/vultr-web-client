@@ -1,8 +1,114 @@
 <ng-include src="'/_partials/nav.html'"></ng-include>
-    <div class="page">
-        <h4 class="text-center title">Deploy Server</h4>
+    <div class="page deploy" ng-init="refresh_server_config_list()">
+        <h4 class="text-center title upper"><i class="fa fa-plus-circle"></i> Deploy</h4>
         <div class="panel">
-            
+            <div class="server-type">
+                <ul class="nav type-nav"
+                    ng-class="{selected: data.plan_type != null}">
+                    <li class="type-btn info ssd pad-top pad-bottom"
+                        ng-class="{active: data.plan_type == 'SSD'}"
+                        ng-click="set_plan_type('SSD')">
+                        <i class="fa fa-cloud"></i>
+                        <p class="label">Compute</p>
+                    </li>
+                    <li class="type-btn info sata pad-top pad-bottom"
+                        ng-class="{active: data.plan_type == 'SATA'}"
+                        ng-click="set_plan_type('SATA')">
+                        <i class="fa fa-database"></i>
+                        <p class="label">Storage</p>
+                    </li>
+                    <li class="type-btn info dedicated pad-top pad-bottom"
+                        ng-class="{active: data.plan_type == 'DEDICATED'}"
+                        ng-click="set_plan_type('DEDICATED')">
+                        <i class="fa fa-server"></i>
+                        <p class="label">Dedicated</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="server-config pad-top pad-bottom pad-left pad-right expand"
+                ng-show="data.plan_type != null">
+                <div class="inner">
+                    <div class="select select-region">
+                        <p>Region</p>
+                        <select chosen
+                            options="regions"
+                            ng-model="data.region"
+                            ng-options="region.DCID as region.name for region in regions"
+                            on-change="select_region_changed">
+                        </select>
+                    </div>
+
+                    <div class="select select-os">
+                        <p>OS</p>
+                        <select chosen
+                            option="oses"
+                            ng-model="data.os"
+                            ng-options="os.OSID as os.name for os in oses"
+                            on-change="select_os_changed">
+                        </select>
+                    </div>
+
+                    <div class="select select-plan">
+                        <p>Plan</p>
+                        <select chosen
+                            option="plans"
+                            ng-model="data.plan"
+                            ng-options="plan.VPSPLANID as plan.name for plan in plans"
+                            on-change="select_plan_changed">
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="server-additional expand"
+                ng-show="show_additional">
+                <div class="inner">
+                    <div class="top pad-bottom pad-left pad-right">
+                        <div class="select select-features">
+                            <p>Features</p>
+                            <select chosen
+                                multiple
+                                options="features"
+                                ng-model="data.features"
+                                ng-options="feature.feature as feature.name for feature in features">
+                            </select>
+                        </div>
+                        <div class="select select-sshkeys">
+                            <p>SSH Keys</p>
+                            <select chosen
+                                multiple 
+                                options="sshkeys"
+                                ng-model="data.sshkey"
+                                ng-options="sshkey.SSHKEYID as sshkey.name for sshkey in sshkeys">
+                            </select>
+                        </div>
+                        <div class="select select-cripts">
+                            <p>Startup Script</p>
+                            <select chosen
+                                option="startupscripts"
+                                ng-model="data.startupscript"
+                                ng-options="startupscript.SCRIPTID as startupscript.name for startupscript in startupscripts">
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="bottom pad-bottom pad-top pure-form">
+                        <div class="textfield textfield-label pad-bottom pad-left pad-right">
+                            <p>Label *</p>
+                            <input type="text" ng-model="data.label" />
+                        </div>
+                        <div class="submit submit-deploy pad-left pad-right">
+                            <button class="pure-button pure-button-primary"
+                                ng-class="{'pure-button-disabled': (data.label == '')}"
+                                ng-click="deploy_server()">
+                                <i class="fa fa-plus-circle"></i>
+                                <span class="upper">Deploy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

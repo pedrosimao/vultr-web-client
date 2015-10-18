@@ -1,6 +1,6 @@
 <ng-include src="'/_partials/nav.html'"></ng-include>
 <div class="page" ng-init="machine_list_refresh()">
-    <h4 class="text-center title">My Machines</h4>
+    <h4 class="text-center title upper"><i class="fa fa-home"></i> Machines</h4>
     <div class="top machine-list" ng-show="servers">
         <div class="machine panel" ng-repeat="server in servers">
             <div class="machine-top">
@@ -83,7 +83,7 @@
                 </li>
             </ul>
 
-            <div class="machine-more ng-hide-animate" ng-show="server.more_info">
+            <div class="machine-more ng-hide-animate expand" ng-show="server.more_info">
                 <div class="inner">
                     <ul class="nav info-top">
                         <li class="machine-btn info usage">

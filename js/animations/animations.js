@@ -1,5 +1,5 @@
 
-vultrWebClient.animation('.machine-more', [function() {
+vultrWebClient.animation('.expand', [function() {
   return {
     addClass: function(element, className, doneFn) {
       // Slide the Machine More container up when ng-hide is added

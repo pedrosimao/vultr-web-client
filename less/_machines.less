@@ -87,9 +87,10 @@
         &.status-changing-os,
         &.status-destorying {
             .action {
+                cursor: progress;
                 .fa,
                 .label {
-                    color: #EEE;
+                    color: #AAA;
                 }
             }
         }
@@ -179,13 +180,9 @@
     }
 
     .machine-more {
-        height: auto;
         overflow: hidden;
-        height: 0;
-        
         .inner {
             border-top: 1px solid #AAA;
-            .clearfix();
         }
     }
 }

@@ -655,6 +655,7 @@ class Vultr
     $region_id = (int) $config['DCID'];
     $plan_id   = (int) $config['VPSPLANID'];
     $os_id     = (int) $config['OSID'];
+    $label     = (int) $config['label'];
 
     try
     {

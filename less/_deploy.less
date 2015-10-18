@@ -1,0 +1,78 @@
+.page.deploy {
+    .select {
+        float: left;
+        width: 33%;
+        padding: 0 10px;
+    }
+    .type-nav {
+        .clearfix();
+        &.selected {
+            .type-btn {
+                .fa,
+                p {
+                    color: @theme-border-color-pri;
+                }
+            }
+            .type-btn.active {
+             
+                .fa,
+                p {
+                    color: @theme-color-pri;
+                }
+            }
+        }
+    }
+    .type-btn {
+        width: 33.33%;
+        float: left;
+        text-align: center;
+        cursor: pointer;
+        border-right: 1px solid @theme-border-color-pri;
+        &:last-child {
+            border-right: 0;
+        }
+        .fa,
+        p {
+            color: #666;
+            transition: all 0.5s;
+        }
+        .fa {
+            font-size: 1.5em;
+        }
+        p {
+            margin: 0;
+        }
+    }
+
+    .server-config {
+        .clearfix();
+        border-top: 1px solid @theme-border-color-pri;
+    }
+
+    .server-additional {
+        .top,
+        .bottom {
+            .clearfix();
+        }
+        .top {
+            border-bottom: 1px solid @theme-border-color-pri;
+        }
+    }
+
+    .textfield-label,
+    .submit-deploy {
+        display: block;
+        margin: auto;
+        max-width: 300px;
+        width: 100%;
+        input,
+        button {
+            width: 100%;
+        }
+    }
+    .textfield-label {
+        p {
+            margin-top: 0;
+        }
+    }
+}
