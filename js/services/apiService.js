@@ -117,7 +117,11 @@ vultrWebClient.factory('apiService', [
        * @param vpsplanid - VPS Plan ID to use for server type
        * @param optional_params - Optional additional params
        */
-       server.create = function(dcid, osid, vpsplanid, label, optional_params) {
+       server.create = function(dcid,
+                                osid,
+                                vpsplanid,
+                                label,
+                                optional_params) {
         var d = $q.defer();
         $http.post('/proxy/server/create',
             {
@@ -125,7 +129,8 @@ vultrWebClient.factory('apiService', [
               'DCID': dcid,
               'OSID': osid,
               'VPSPLANID': vpsplanid,
-              'label': label
+              'label': label,
+              'params': optional_params
             }
           )
           .then(function(response) {

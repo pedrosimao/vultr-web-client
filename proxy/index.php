@@ -9,7 +9,7 @@
 include_once('Vultr.class.php');
 $postdata = json_decode(file_get_contents("php://input"));
 // $context and $action to be provided via .htaccess file
-error_reporting(0);
+//error_reporting(0);
 $context = $_GET['context'];
 $action = $_GET['action'];
 $api = new Vultr($postdata->api_key);
@@ -68,12 +68,17 @@ switch($context) {
             // Create a server
             case 'create':
                 try {
+                    $optional_params = (isset($postdata->params)) ? $postdata->params : '';
+
                     $config = array(
                         'DCID' => (isset($postdata->DCID)) ? $postdata->DCID : '',
                         'VPSPLANID' => (isset($postdata->VPSPLANID)) ? $postdata->VPSPLANID : '',
                         'OSID' => (isset($postdata->OSID)) ? $postdata->OSID : '',
                         'label' => (isset($postdata->label)) ? $postdata->label : '',
+                        'SCRIPTID' => (isset($optional_params->SCRIPTID)) ? $optional_params->SCRIPTID : '',
+                        'SSHKEYID' => (isset($optional_params->SSHKEYID)) ? $optional_params->SSHKEYID : '',
                     );
+                    var_dump($config);
                     $response = json_encode($api->create($config));
                     error_log($response);
                 } catch(Exception $ex) {

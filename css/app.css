@@ -274,6 +274,9 @@ h4.title .fa {
   font-size: 1.8em;
   text-align: center;
 }
+.machine .machine-status .fa.pending.ng-hide-animate {
+  display: none;
+}
 .machine .machine-status .fa.running,
 .machine .machine-status .fa.active {
   color: green;

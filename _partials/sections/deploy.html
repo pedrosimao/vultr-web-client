@@ -31,6 +31,7 @@
                     <div class="select select-region">
                         <p>Region</p>
                         <select chosen
+                            ng-disabled="data.region == 'loading' || data.region == 'empty'"
                             options="regions"
                             ng-model="data.region"
                             ng-options="region.DCID as region.name for region in regions"
@@ -41,6 +42,7 @@
                     <div class="select select-os">
                         <p>OS</p>
                         <select chosen
+                            ng-disabled="data.os == 'loading' || data.os == 'empty'"
                             option="oses"
                             ng-model="data.os"
                             ng-options="os.OSID as os.name for os in oses"
@@ -51,6 +53,7 @@
                     <div class="select select-plan">
                         <p>Plan</p>
                         <select chosen
+                            ng-disabled="data.plan == 'loading' || data.plan == 'empty'"
                             option="plans"
                             ng-model="data.plan"
                             ng-options="plan.VPSPLANID as plan.name for plan in plans"
@@ -67,6 +70,7 @@
                         <div class="select select-features">
                             <p>Features</p>
                             <select chosen
+                                ng-disabled="data.features == 'loading' || data.features == 'empty'"
                                 multiple
                                 options="features"
                                 ng-model="data.features"
@@ -76,6 +80,7 @@
                         <div class="select select-sshkeys">
                             <p>SSH Keys</p>
                             <select chosen
+                                ng-disabled="data.sshkey == 'loading' || data.sshkey == 'empty'"
                                 multiple 
                                 options="sshkeys"
                                 ng-model="data.sshkey"
@@ -85,6 +90,7 @@
                         <div class="select select-cripts">
                             <p>Startup Script</p>
                             <select chosen
+                                ng-disabled="data.startupscript == 'loading' || data.startupscript == 'empty'"
                                 option="startupscripts"
                                 ng-model="data.startupscript"
                                 ng-options="startupscript.SCRIPTID as startupscript.name for startupscript in startupscripts">
@@ -99,9 +105,13 @@
                         </div>
                         <div class="submit submit-deploy pad-left pad-right">
                             <button class="pure-button pure-button-primary"
+                                ng-disabled="server_deploying"
                                 ng-class="{'pure-button-disabled': (data.label == '')}"
                                 ng-click="deploy_server()">
-                                <i class="fa fa-plus-circle"></i>
+                                <i class="fa fa-plus-circle"
+                                    ng-hide="server_deploying"></i>
+                                <i class="fa fa-spin fa-circle-o-notch"
+                                    ng-show="server_deploying"></i>
                                 <span class="upper">Deploy</span>
                             </button>
                         </div>

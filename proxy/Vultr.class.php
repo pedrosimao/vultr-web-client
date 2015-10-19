@@ -824,7 +824,8 @@ class Vultr
         }
 
         $cacheable = true;
-        $response = $this->serveFromCache($_defaults[CURLOPT_URL]);
+        $response = false;
+        //$response = $this->serveFromCache($_defaults[CURLOPT_URL]);
     if ($response !== false)
         {
           //echo "FROM CACHE: $url\n";

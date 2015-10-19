@@ -12,18 +12,14 @@ vultrWebClient.controller('DeployCtrl', [
     api) {
 
     // @TODO: check if logged in first..
-    var default_plan_list = [
-      {
-        'VPSPLANID': 'loading',
-        'name': 'Loading Plans..'
-      }
-    ];
+    
     $scope.show_additional = false;
+    $scope.server_deploying = false;
     $scope.data = {
       plan_type: null,
       region: 'loading',
       os: 'loading',
-      plan: 'loading',
+      plan: 'empty',
       features: [],
       sshkey: [],
       startupscript: 'loading',
@@ -39,6 +35,12 @@ vultrWebClient.controller('DeployCtrl', [
       {
         'OSID': 'loading',
         'name': 'Loading OSes..'
+      }
+    ];
+    $scope.plans = [
+      {
+        'VPSPLANID': 'empty',
+        'name': 'Select Region First..'
       }
     ];
     $scope.sshkeys = [
@@ -71,8 +73,6 @@ vultrWebClient.controller('DeployCtrl', [
         'name': 'DDOS Protection'
       }
     ];
-    $scope.plans = default_plan_list;
-
 
     $scope.set_plan_type = function(type) {
       $scope.data.plan_type = type;
@@ -161,6 +161,7 @@ vultrWebClient.controller('DeployCtrl', [
                 'name': 'No SSH keys found..'
               }
             ];
+            $scope.data.sshkey = 'empty';
           } else {
             $scope.sshkeys = sshkeys;
           }
@@ -186,6 +187,7 @@ vultrWebClient.controller('DeployCtrl', [
                 'name': 'No startup scripts found..'
               }
             ];
+            $scope.data.startupscript = 'empty';
           } else {
             $scope.startupscripts = startupscripts;
           }
@@ -198,7 +200,10 @@ vultrWebClient.controller('DeployCtrl', [
 
     $scope.plan_list_refresh = function() {
       // retrieve the list of plans from Vultr
-      $scope.plans = default_plan_list;
+      $scope.plans = [{
+          'VPSPLANID': 'loading',
+          'name': 'Loading Plans..'
+      }];
       $scope.data.plan = 'loading';
       api.plans.list().then(
         function(plans) {
@@ -212,13 +217,20 @@ vultrWebClient.controller('DeployCtrl', [
             // filter out plans that aren't in our our selected options
             var plan = plans[i];
             if(
-              ($scope.data.plan_type !== null && $scope.data.plan_type != plan.plan_type) &&
+              ($scope.data.plan_type !== null && $scope.data.plan_type == plan.plan_type) &&
               ($scope.data.region !== null && plan.available_locations.indexOf(parseInt($scope.data.region)) != -1)
               ) {
                 plan.name = plan.name.replace(/,/g, ', ');
                 plan.name = plan.name.replace(/.00/g, '');
                 $scope.plans[i] = plan;
             }
+          }
+          if(!Object.keys($scope.plans).length) {
+            $scope.plans = [{
+              'VPSPLANID': 'empty',
+              'name': 'Select Region First..'
+            }];
+            $scope.data.plan = 'empty';
           }
         },
         function(error) {
@@ -230,13 +242,27 @@ vultrWebClient.controller('DeployCtrl', [
 
   $scope.deploy_server = function() {
     console.warn('Deploying new server..');
-
+    $scope.server_deploying = true;
     // Sanity checks.. Angular should take care of the majority of validation.
+    
+    var params = {};
+    console.log($scope.data.sshkey);
+    if($scope.data.sshkey != 'loading' && $scope.data.sshkey != 'empty') {
+      var sshkeys = '';
+      for(var i in $scope.data.sshkey) {
+        sshkeys = $scope.data.sshkey + ',';
+      }
+      params.SSHKEYID = $scope.sshkeys;
+    }
+    if($scope.data.startupscript != 'loading' && $scope.data.startupscript != 'empty') {
+      params.SCRIPTID = $scope.startupscript;
+    }
     api.server.create(
       $scope.data.region,
       $scope.data.os,
       $scope.data.plan,
-      $scope.data.label)
+      $scope.data.label,
+      params)
       .then(function() {
         $location.path('/machines');
       });
