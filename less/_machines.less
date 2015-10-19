@@ -6,6 +6,12 @@
     p {
         margin: 0;
     }
+    &.empty{
+        .deploy {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    }
 }
 
 .machine {
@@ -42,7 +48,7 @@
         .fa {  
             font-size: 1.8em;
             text-align: center;
-            &.pending.ng-hide-animate {
+            &.ng-hide {
                 display: none;
             }
             &.running,
@@ -88,13 +94,17 @@
         &.status-rebooting,
         &.status-reinstalling,
         &.status-changing-os,
-        &.status-destorying {
+        &.status-destroying {
             .action {
                 cursor: progress;
-                .fa,
-                .label {
-                    color: #AAA;
-                }
+            }
+            .fa,
+            .label {
+                color: #AAA;
+            }
+            &.state-none,
+            &.state-locked {
+                color: #AAA;
             }
         }
 

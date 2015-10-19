@@ -3,15 +3,20 @@
  *  Controller for the Deploy Server page
  */
 vultrWebClient.controller('DeployCtrl', [
+  '$rootScope',
   '$scope',
   '$location',
   'apiService',
   function(
+    $rootScope,
     $scope,
     $location,
     api) {
 
     // @TODO: check if logged in first..
+
+    // make sure the machine refresh interval is killed. its not needed here.
+    clearInterval($rootScope.machine_list_refresh_interval);
     
     $scope.show_additional = false;
     $scope.server_deploying = false;
@@ -67,10 +72,6 @@ vultrWebClient.controller('DeployCtrl', [
       {
         'feature': 'backups',
         'name': 'Auto Backups'
-      },
-      {
-        'feature': 'ddos',
-        'name': 'DDOS Protection'
       }
     ];
 
@@ -79,6 +80,7 @@ vultrWebClient.controller('DeployCtrl', [
       $scope.regions_list_refresh();
       $scope.os_list_refresh();
       $scope.plan_list_refresh();
+      console.log($scope.data.features);
     };
 
     $scope.set_additional = function() {
@@ -246,17 +248,33 @@ vultrWebClient.controller('DeployCtrl', [
     // Sanity checks.. Angular should take care of the majority of validation.
     
     var params = {};
-    console.log($scope.data.sshkey);
-    if($scope.data.sshkey != 'loading' && $scope.data.sshkey != 'empty') {
-      var sshkeys = '';
-      for(var i in $scope.data.sshkey) {
-        sshkeys = $scope.data.sshkey + ',';
-      }
-      params.SSHKEYID = $scope.sshkeys;
+
+    // Set Features params
+    if($scope.data.features.indexOf('ipv6') != -1) {
+      params.enable_ipv6 = 'yes';
     }
+    if($scope.data.features.indexOf('private_network') != -1) {
+      params.enable_private_network = 'yes';
+    }
+    if($scope.data.features.indexOf('backups') != -1) {
+      params.auto_backups = 'yes';
+    }
+
+    // Set SSH Key params
+    if($scope.data.sshkey != 'loading' && $scope.data.sshkey != 'empty') {
+      params.SSHKEYID = '';
+      for(var i in $scope.data.sshkey) {
+        params.SSHKEYID = $scope.data.sshkey[i] + ',';
+        // remove trailing comma
+        params.SSHKEYID = params.SSHKEYID.replace(/,+$/, ""); 
+      }
+    }
+
+    // Set Startup Script param
     if($scope.data.startupscript != 'loading' && $scope.data.startupscript != 'empty') {
       params.SCRIPTID = $scope.startupscript;
     }
+
     api.server.create(
       $scope.data.region,
       $scope.data.os,

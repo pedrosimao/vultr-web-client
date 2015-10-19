@@ -232,6 +232,10 @@ h4.title .fa {
 .machine-list p {
   margin: 0;
 }
+.machine-list.empty .deploy {
+  font-weight: bold;
+  margin-top: 20px;
+}
 .machine {
   width: 100%;
   border: 1px #DDD solid;
@@ -274,7 +278,7 @@ h4.title .fa {
   font-size: 1.8em;
   text-align: center;
 }
-.machine .machine-status .fa.pending.ng-hide-animate {
+.machine .machine-status .fa.ng-hide {
   display: none;
 }
 .machine .machine-status .fa.running,
@@ -324,23 +328,39 @@ h4.title .fa {
 .machine .machine-bottom.status-rebooting .action,
 .machine .machine-bottom.status-reinstalling .action,
 .machine .machine-bottom.status-changing-os .action,
-.machine .machine-bottom.status-destorying .action {
+.machine .machine-bottom.status-destroying .action {
   cursor: progress;
 }
-.machine .machine-bottom.status-pending .action .fa,
-.machine .machine-bottom.status-starting .action .fa,
-.machine .machine-bottom.status-halting .action .fa,
-.machine .machine-bottom.status-rebooting .action .fa,
-.machine .machine-bottom.status-reinstalling .action .fa,
-.machine .machine-bottom.status-changing-os .action .fa,
-.machine .machine-bottom.status-destorying .action .fa,
-.machine .machine-bottom.status-pending .action .label,
-.machine .machine-bottom.status-starting .action .label,
-.machine .machine-bottom.status-halting .action .label,
-.machine .machine-bottom.status-rebooting .action .label,
-.machine .machine-bottom.status-reinstalling .action .label,
-.machine .machine-bottom.status-changing-os .action .label,
-.machine .machine-bottom.status-destorying .action .label {
+.machine .machine-bottom.status-pending .fa,
+.machine .machine-bottom.status-starting .fa,
+.machine .machine-bottom.status-halting .fa,
+.machine .machine-bottom.status-rebooting .fa,
+.machine .machine-bottom.status-reinstalling .fa,
+.machine .machine-bottom.status-changing-os .fa,
+.machine .machine-bottom.status-destroying .fa,
+.machine .machine-bottom.status-pending .label,
+.machine .machine-bottom.status-starting .label,
+.machine .machine-bottom.status-halting .label,
+.machine .machine-bottom.status-rebooting .label,
+.machine .machine-bottom.status-reinstalling .label,
+.machine .machine-bottom.status-changing-os .label,
+.machine .machine-bottom.status-destroying .label {
+  color: #AAA;
+}
+.machine .machine-bottom.status-pending.state-none,
+.machine .machine-bottom.status-starting.state-none,
+.machine .machine-bottom.status-halting.state-none,
+.machine .machine-bottom.status-rebooting.state-none,
+.machine .machine-bottom.status-reinstalling.state-none,
+.machine .machine-bottom.status-changing-os.state-none,
+.machine .machine-bottom.status-destroying.state-none,
+.machine .machine-bottom.status-pending.state-locked,
+.machine .machine-bottom.status-starting.state-locked,
+.machine .machine-bottom.status-halting.state-locked,
+.machine .machine-bottom.status-rebooting.state-locked,
+.machine .machine-bottom.status-reinstalling.state-locked,
+.machine .machine-bottom.status-changing-os.state-locked,
+.machine .machine-bottom.status-destroying.state-locked {
   color: #AAA;
 }
 .machine .machine-bottom.status-starting .start .fa,

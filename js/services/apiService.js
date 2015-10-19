@@ -134,6 +134,7 @@ vultrWebClient.factory('apiService', [
             }
           )
           .then(function(response) {
+            console.log(response);
             d.resolve(response);
           }, function(error) {
             d.reject(error);

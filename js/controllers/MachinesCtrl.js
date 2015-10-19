@@ -3,15 +3,18 @@
  *  Controller for the Home/Existing Machines page
  */
 vultrWebClient.controller('MachinesCtrl', [
+  '$rootScope',
   '$scope',
   'apiService',
   function(
+    $rootScope,
     $scope,
     api) {
 
 
     // @TODO: check if logged in first..
-    
+
+
 
     $scope.servers = null;
     $scope.servers_loading = true;
@@ -22,6 +25,11 @@ vultrWebClient.controller('MachinesCtrl', [
       api.server.list().then(
         function(servers) {
           console.log(servers);
+          for(var subid in $scope.servers) {
+            if($scope.servers[subid].more_info) {
+              servers[subid].more_info = true;
+            }
+          }
           $scope.servers_loading = false;
           $scope.servers = servers;
         },
@@ -34,8 +42,14 @@ vultrWebClient.controller('MachinesCtrl', [
       );
     };
 
+    $scope.init = function() {
+      $scope.machine_list_refresh();
+      clearInterval($rootScope.machine_list_refresh_interval);
+      $rootScope.machine_list_refresh_interval = setInterval($scope.machine_list_refresh, 3000);
+    };
+
     $scope.machine_action_allowed = function(subid) {
-      return $scope.servers[subid].status == 'active';
+      return $scope.servers[subid].server_state == 'ok';
     };
 
     $scope.machine_action_confirm = function(subid) {
@@ -53,56 +67,61 @@ vultrWebClient.controller('MachinesCtrl', [
     };
      
     $scope.machine_action_destroy = function(subid) {
+      clearInterval($rootScope.machine_list_refresh_interval);
       if($scope.machine_action_confirm(subid)) {
-        $scope.servers[subid].status = 'destorying';
+        $scope.servers[subid].status = 'destroying';
         console.warn('Destroying ' + subid);
         api.server.destroy(subid)
           .then(function() {
-            $scope.machine_list_refresh();
+            $scope.init();
           });
       }
     };
 
     $scope.machine_action_halt = function(subid) {
+      clearInterval($rootScope.machine_list_refresh_interval);
       if($scope.machine_action_confirm(subid)) {
         $scope.servers[subid].status = 'halting';
         console.warn('Halting ' + subid);
         api.server.halt(subid)
           .then(function() {
-            $scope.machine_list_refresh();
+            $scope.init();
           });
       }
     };
 
     $scope.machine_action_reboot = function(subid) {
+      clearInterval($rootScope.machine_list_refresh_interval);
       if($scope.machine_action_confirm(subid)) {
         $scope.servers[subid].status = 'rebooting';
         console.warn('Restarting ' + subid);
         api.server.reboot(subid)
           .then(function() {
-            $scope.machine_list_refresh();
+            $scope.init();
           });
       }
     };
 
     $scope.machine_action_reinstall = function(subid) {
+      clearInterval($rootScope.machine_list_refresh_interval);
       if($scope.machine_action_confirm(subid)) {
         $scope.servers[subid].status = 'reinstalling';
         console.warn('Reinstalling ' + subid);
         api.server.reinstall(subid)
           .then(function() {
-            $scope.machine_list_refresh();
+            $scope.init();
           });
       }
     };
 
     $scope.machine_action_start = function(subid) {
+      clearInterval($rootScope.machine_list_refresh_interval);
       if($scope.machine_action_confirm(subid)) {
         $scope.servers[subid].status = 'starting';
         console.warn('Starting ' + subid);
         api.server.start(subid)
           .then(function() {
-            $scope.machine_list_refresh();
+            $scope.init();
           });
       }
     };

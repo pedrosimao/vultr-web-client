@@ -77,10 +77,11 @@ switch($context) {
                         'label' => (isset($postdata->label)) ? $postdata->label : '',
                         'SCRIPTID' => (isset($optional_params->SCRIPTID)) ? $optional_params->SCRIPTID : '',
                         'SSHKEYID' => (isset($optional_params->SSHKEYID)) ? $optional_params->SSHKEYID : '',
+                        'enable_ipv6' => (isset($optional_params->enable_ipv6)) ? $optional_params->enable_ipv6 : 'no',
+                        'enable_private_network' => (isset($optional_params->enable_private_network)) ? $optional_params->enable_private_network : 'no',
+                        'auto_backups' => (isset($optional_params->auto_backups)) ? $optional_params->auto_backups : 'no',
                     );
-                    var_dump($config);
                     $response = json_encode($api->create($config));
-                    error_log($response);
                 } catch(Exception $ex) {
                     http_response_code(400);
                 }

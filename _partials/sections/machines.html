@@ -1,16 +1,16 @@
 <ng-include src="'/_partials/nav.html'"></ng-include>
-<div class="page" ng-init="machine_list_refresh()">
+<div class="page" ng-init="init()">
     <h4 class="text-center title upper"><i class="fa fa-home"></i> Machines</h4>
     <div class="top machine-list" ng-show="servers">
         <div class="machine panel" ng-repeat="server in servers">
             <div class="machine-top">
                 <div class="machine-status">
-                    <i class="fa fa-power-off {{server.power_status}}" ng-show="machine_action_allowed(server.SUBID)"></i>
-                    <i class="fa fa-spinner fa-pulse pending" ng-hide="machine_action_allowed(server.SUBID)"></i>
+                    <i class="fa fa-power-off power {{server.power_status}}" ng-show="server.status == 'active'"></i>
+                    <i class="fa fa-spinner fa-pulse pending" ng-hide="server.status == 'active'"></i>
                 </div>
                 <div class="machine-col machine-secrets">
                     <p class="machine-label">{{server.label}}</p>
-                    <p class="machine-meta machine-ip"><i class="fa fa-cloud offset-right"></i><span class="text">{{server.gateway_v4}}</span></p>
+                    <p class="machine-meta machine-ip"><i class="fa fa-cloud offset-right"></i><span class="text">{{server.main_ip}}</span></p>
                     <p class="machine-meta"><i class="fa fa-lock offset-right"></i>
                         <i class="fa fa-circle"></i>
                         <i class="fa fa-circle"></i>
@@ -42,7 +42,7 @@
                     <p class="machine-meta"><i class="fa fa-globe offset-right"></i>{{server.location}}</p>
                 </div>
             </div>
-            <ul class="machine-bottom nav status-{{server.status}}">
+            <ul class="machine-bottom nav status-{{server.status}} state-{{server.server_state}}">
                 <li class="machine-btn console action"
                     ng-click="machine_action_console(server.SUBID)">
                     <i class="fa fa-laptop"></i>
@@ -120,11 +120,13 @@
             </div>
         </div>
     </div>
-    <div class="top machine machine-list loading panel" ng-show="servers_loading">
+    <div class="top machine-list loading panel" ng-show="servers_loading">
         <p class="text-center"><i class="fa fa-spin fa-circle-o-notch"></i> Loading..</p>
     </div>
     <div class="top machine-list loading empty panel" ng-show="servers.length == 0">
-        <p class="text-center"><i class="fa fa-exclamation-circle"></i> You don't have any Machines</p>
+        <p class="text-center"><i class="fa fa-exclamation-triangle"></i></p>
+        <p class="text-center">You don't have any Machines</p>
+        <p class="text-center deploy"><a href="/#/deploy"><i class="fa fa-plus-circle"></i> Deploy A Machine</a></p>
     </div>
     <div class="top machine-list loading panel" ng-show="servers_error">
         <p class="text-center">Error Loading Machines. Please try again</p>
