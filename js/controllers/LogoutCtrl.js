@@ -12,6 +12,6 @@ vultrWebClient.controller('LogoutCtrl', [
     api
     ) {
       // Remove the api key and redirect to the start page
-      api.helpers.removeKey();
+      api.helpers.remove_key();
       $location.path('/login');
   }]);

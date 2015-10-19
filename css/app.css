@@ -1,3 +1,8 @@
+.monospace {
+  font-family: 'Source Code Pro';
+  letter-spacing: 0.18em;
+  text-shadow: 0px 0px 5px #333;
+}
 * {
   box-sizing: border-box;
 }
@@ -38,6 +43,8 @@ h4 {
 }
 h4.title {
   color: #FFF;
+  margin: 60px 0;
+  font-size: 40px;
 }
 h5 {
   font-size: 18px;
@@ -115,6 +122,9 @@ a {
 .upper {
   text-transform: uppercase;
 }
+.bold {
+  font-weight: bold;
+}
 .cf:before,
 .cf:after {
   content: "";
@@ -187,6 +197,31 @@ ul.nav li {
 .expand .inner:after {
   clear: both;
 }
+/*** custom checkboxes ***/
+input[type=checkbox] {
+  display: none;
+}
+/* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+input[type=checkbox] + label:before {
+  content: "\f096";
+}
+/* unchecked icon */
+input[type=checkbox] + label:before {
+  letter-spacing: 10px;
+}
+/* space between checkbox and label */
+input[type=checkbox].checked + label:before {
+  content: "\f046";
+}
+/* checked icon */
+input[type=checkbox].checked + label:before {
+  letter-spacing: 7px;
+}
+/* allow space for check mark */
 #__bs_notify__ {
   top: auto !important;
   bottom: 0 !important;
@@ -195,7 +230,7 @@ ul.nav li {
 }
 #main {
   width: 100%;
-  padding-top: 48px;
+  padding-top: 66px;
   background-color: #25aacb;
 }
 #nav-main {
@@ -205,25 +240,104 @@ ul.nav li {
   right: 0;
   width: 100%;
   border-bottom: 1px solid #DDD;
+  background-color: #FFF;
 }
 #nav-main ul {
   width: 100%;
 }
 #nav-main ul li {
   width: 25%;
+  border-right: 1px solid #DDD;
 }
-#login-page {
-  background: #000;
-  color: #25aacb;
+#nav-main ul li:last-child {
+  border-right: 0;
+}
+#nav-main ul li .fa {
+  font-size: 20px;
 }
 .page {
-  padding: 15px;
+  padding: 0 15px;
 }
 table {
   max-width: 100%;
 }
-h4.title .fa {
-  margin-right: 10px;
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFF;
+  padding: 12px;
+  font-size: 12px;
+}
+#footer a,
+#footer p {
+  color: #666;
+  margin: 0;
+}
+#footer .bottom {
+  margin-top: 3px;
+}
+#footer .bottom a {
+  text-decoration: underline;
+}
+#footer .top .fa {
+  font-size: 20px;
+}
+#footer .top span {
+  display: inline-block;
+  margin-left: 5px;
+}
+#footer .top .fa,
+#footer .top span {
+  vertical-align: middle;
+}
+#login-page {
+  padding: 30px;
+}
+#login-page h2 {
+  color: #FFF;
+  margin: 100px 0 100px 0;
+  margin: 8vh 0 8vh 0;
+  font-size: 80px;
+}
+#login-page p {
+  color: #FFF;
+  font-size: 28px;
+}
+#login-page p.intro {
+  margin-bottom: 60px;
+}
+#login-page p.small {
+  font-size: 14px;
+  margin-top: 60px;
+}
+#login-page .form-element {
+  padding: 8px 15px;
+  color: #FFF;
+}
+#login-page .form-element.text {
+  color: #222;
+}
+#login-page .form-element.text input {
+  width: 250px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #AAA;
+  box-shadow: 0px 0px 5px #333;
+}
+#login-page .form-element.button {
+  font-size: 18px;
+}
+#login-page .form-element.button button {
+  width: 250px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+#login-page .form-element.button .fa {
+  margin-left: 5px;
 }
 .machine-list.loading {
   padding: 40px 30px;

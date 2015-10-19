@@ -33,6 +33,8 @@ h4 {
     font-size: 28px;
     &.title {
       color: #FFF;
+      margin: 60px 0;
+      font-size: 40px;
     }
 }
 h5 {
@@ -109,6 +111,9 @@ a {
 .upper {
   text-transform: uppercase;
 }
+.bold {
+  font-weight: bold;
+}
 
 // Clearfix
 .cf {
@@ -182,6 +187,21 @@ ul.nav {
     .clearfix();
   }
 }
+
+/*** custom checkboxes ***/
+// Credits to http://codepen.io/jamesbarnett/pen/yILjk/
+input[type=checkbox] { display:none; } /* to hide the checkbox itself */
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+}
+
+input[type=checkbox] + label:before { content: "\f096"; } /* unchecked icon */
+input[type=checkbox] + label:before { letter-spacing: 10px; } /* space between checkbox and label */
+
+input[type=checkbox].checked + label:before { content: "\f046"; } /* checked icon */
+input[type=checkbox].checked + label:before { letter-spacing: 7px; } /* allow space for check mark */
+
 
 // BrowserSync overlay
 #__bs_notify__ {

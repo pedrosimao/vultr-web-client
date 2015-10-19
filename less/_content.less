@@ -1,6 +1,7 @@
 #main {
     width: 100%;
-    padding-top: 48px;background-color: #25aacb;
+    padding-top: 66px;
+    background-color: @theme-color-sec;
 }
 
 #nav-main {
@@ -10,30 +11,60 @@
     right: 0;
     width: 100%;
     border-bottom: 1px solid @theme-border-color-pri;
+    background-color: #FFF;
     ul {
         width: 100%;
         li {
             width: 25%;
+            border-right: 1px solid @theme-border-color-pri;
+            &:last-child {
+                border-right: 0;
+            }
+            .fa {
+                font-size: 20px;
+            }
         }
     }
 }
 
-#login-page {
-    background: #000;
-    color: @theme-color-sec;
-}
-
 .page {
-    padding: @base-padding-sm;
+    padding: 0 @base-padding-sm;
 }
 
 table {
     max-width: 100%;
 }
 
+#footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #FFF;
+    padding: 12px;
+    font-size: 12px;
 
-h4.title {
-    .fa {
-        margin-right: 10px;
+    a, p {
+        color: #666;
+        margin: 0;
+    }
+    .bottom {
+        margin-top: 3px;
+        a {
+            text-decoration: underline;
+        }
+    }
+    .top {
+        .fa {
+            font-size: 20px;
+        }
+        span {
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .fa,
+        span {
+            vertical-align: middle;
+        }
     }
 }

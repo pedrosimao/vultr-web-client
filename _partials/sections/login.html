@@ -1,5 +1,15 @@
-<div id="login-page">
-    <h3>Login with your Vultr API Key</h3>
-    <input type="text" ng-model="vultrKey">
-    <button class="pure-button" ng-click="saveKey()">Login</button>
+<div id="login-page" class="text-center">
+    <h2 class="monospace">VultrApp</h2>
+
+    <p class="intro">Enter your Vultr API Key to begin managing your machines</p>
+    <div class="form-element text text-key">
+        <input type="text" ng-model="vultr_key">
+    </div>
+    <div class="form-element button button-save-key">
+        <button class="pure-button" ng-click="save_key()"
+            ng-focus="vultr_key == ''"
+            ng-disabled="vultr_key == ''">
+                Login <i class="fa fa-arrow-circle-right"></i></button>
+    </div>
+    <p class="small"><a href="https://my.vultr.com/settings" target="_blank">Where do I find my API Key?</a></p>
 </div>
