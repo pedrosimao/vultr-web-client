@@ -1,4 +1,4 @@
-var vultrWebClient = angular.module('vultrWebClient', ['ngRoute', 'ngAnimate', 'angular.chosen']);
+var vultrWebClient = angular.module('vultrWebClient', ['ngRoute', 'ngAnimate', 'angular.chosen', 'chart.js']);
 
 /**
  * App Config

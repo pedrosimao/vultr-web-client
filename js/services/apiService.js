@@ -111,6 +111,26 @@ vultrWebClient.factory('apiService', [
       /***********************************
        * Server resources
        **********************************/
+      /**
+       * server.bandwidth() - Get a la server's bandwidth usage
+       * @param subid - Server ID of server to get bandwidth for
+       */
+       server.bandwidth = function(subid) {
+        var d = $q.defer();
+        $http.post('/proxy/server/bandwidth',
+            {
+              'api_key': vultr_key,
+              'SUBID': subid
+            }
+          )
+          .then(function(response) {
+            console.log(response);
+            d.resolve(response.data);
+          }, function(error) {
+            d.reject(error);
+          });
+        return d.promise;
+      };
 
       /**
        * server.create() - Create a new server

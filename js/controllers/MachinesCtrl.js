@@ -131,10 +131,29 @@ vultrWebClient.controller('MachinesCtrl', [
     $scope.machine_more = function(subid) {
       if(!$scope.servers[subid].more_info) {
         $scope.servers[subid].more_info = true;
+        $scope.info_usage(subid);
       } else {
         $scope.servers[subid].more_info = false;
       }
     };
+
+    $scope.info_usage = function(subid) {
+      console.log($scope.bandwidth)
+      api.server.bandwidth(subid)
+          .then(function(results) {
+            $scope.bandwidth = {
+              series: ['Incoming (Mb)', 'Outgoing (Mb)'],
+              labels: [],
+              data: [[], []]
+            };
+            for(var i in results.incoming_bytes) {
+              $scope.bandwidth.data[0].push((results.incoming_bytes[i][1]/1024/1024));
+              $scope.bandwidth.data[1].push((results.outgoing_bytes[i][1]/1024/1024));
+              $scope.bandwidth.labels.push(results.incoming_bytes[i][0]);
+              
+            }
+          });
+    }
 
 
   }]);

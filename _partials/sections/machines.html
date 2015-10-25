@@ -113,7 +113,15 @@
                     </ul>
                     <div class="info-bottom">
                         <div class="info-panel usage">
-                            <p>Defaut panel: Usage. Yet to be implemented..</p>
+                            <div ng-show="bandwidth">
+                                <canvas id="line" class="chart chart-line" chart-data="bandwidth.data"
+                                  chart-labels="bandwidth.labels" chart-legend="true" chart-series="bandwidth.series">
+                                </canvas>
+                            <p class="text-italic text-center panel-msg">Note: only bandwidth usage is available at this time</p>
+                            </div>
+                            <div class="panel-loading" ng-hide="bandwidth">
+                                <i class="fa fa-spin fa-circle-o-notch loading"></i>
+                            </div>
                         </div>
                     </div>
                 </div>

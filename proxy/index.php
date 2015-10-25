@@ -65,6 +65,15 @@ switch($context) {
     // Server resources
     case 'server':
         switch ($action) {
+            // Retrieve server badwidth usage
+            case 'bandwidth':
+                try {
+                    $server_id = (isset($postdata->SUBID)) ? $postdata->SUBID : '';
+                    echo json_encode($api->bandwidth($server_id));
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
             // Create a server
             case 'create':
                 try {

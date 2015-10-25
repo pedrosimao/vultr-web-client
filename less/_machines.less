@@ -197,8 +197,32 @@
         .inner {
             border-top: 1px solid #AAA;
         }
+        .info-panel {
+            border-top: 1px solid @theme-border-color-pri;
+            padding: 15px;
+
+            .panel-msg {
+                font-weight: 0.6em;
+                margin-top: 15px;
+            }
+        }
+        .info-top {
+            .clearfix();
+        }
+        .info-bottom {
+            .panel-loading {
+                padding: 40px;
+                text-align: center;
+
+                .fa {
+                    font-size: 32px;
+                    color: @theme-color-sec;
+                }
+            }
+        }
     }
 }
+
 @keyframes flash-status {
     0% {color: #EEE;}
     50% {color: #AAA;}

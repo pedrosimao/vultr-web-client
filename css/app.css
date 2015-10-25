@@ -111,6 +111,12 @@ a {
 .text-right {
   text-align: right;
 }
+.text-italic {
+  font-style: italic;
+}
+.text-bold {
+  font-weight: bold;
+}
 .text-pri {
   color: #333;
 }
@@ -236,6 +242,7 @@ input[type=checkbox].checked + label:before {
 #main {
   width: 100%;
   padding-top: 66px;
+  padding-bottom: 66px;
   background-color: #25aacb;
 }
 #nav-main {
@@ -244,6 +251,7 @@ input[type=checkbox].checked + label:before {
   left: 0;
   right: 0;
   width: 100%;
+  z-index: 9999;
   border-bottom: 1px solid #DDD;
   background-color: #FFF;
 }
@@ -540,6 +548,30 @@ table {
 }
 .machine .machine-more .inner {
   border-top: 1px solid #AAA;
+}
+.machine .machine-more .info-panel {
+  border-top: 1px solid #DDD;
+  padding: 15px;
+}
+.machine .machine-more .info-panel .panel-msg {
+  font-weight: 0.6em;
+  margin-top: 15px;
+}
+.machine .machine-more .info-top:before,
+.machine .machine-more .info-top:after {
+  content: "";
+  display: table;
+}
+.machine .machine-more .info-top:after {
+  clear: both;
+}
+.machine .machine-more .info-bottom .panel-loading {
+  padding: 40px;
+  text-align: center;
+}
+.machine .machine-more .info-bottom .panel-loading .fa {
+  font-size: 32px;
+  color: #25aacb;
 }
 @keyframes flash-status {
   0% {
