@@ -50,7 +50,7 @@
                 </li>
                 <li class="machine-btn action start"
                     ng-click="machine_action_start(server.SUBID)"
-                    ng-show="server.power_status == 'stopped'">
+                    ng-show="server.power_status != 'running'">
                     <i class="fa fa-play"></i>
                     <p class="label">Start</p>
                 </li>

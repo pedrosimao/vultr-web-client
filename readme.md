@@ -1,8 +1,8 @@
-# Vultr Web Client - [https://vultrapp.com](VultrApp.com)
-### A client for the admistration of [vultr.com](vultr) accounts
+# Vultr Web Client - [VultrApp.com](https://vultrapp.com)
+### A client for the admistration of [vultr](vultr.com) accounts
 
 *Why?* - because I don't like their current one
 
 
 ##### Credits:
-[https://github.com/usefulz/vultr-api-client](Vultr API Client)
+[Vultr API Client](https://github.com/usefulz/vultr-api-client)
