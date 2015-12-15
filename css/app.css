@@ -423,8 +423,6 @@ table {
   color: #000;
 }
 .machine .machine-col {
-  width: 33.333%;
-  float: left;
   padding: 20px;
 }
 .machine .machine-label {

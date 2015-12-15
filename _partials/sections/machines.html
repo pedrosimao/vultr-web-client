@@ -8,38 +8,40 @@
                     <i class="fa fa-power-off power {{server.power_status}}" ng-show="server.status == 'active'"></i>
                     <i class="fa fa-spinner fa-pulse pending" ng-hide="server.status == 'active'"></i>
                 </div>
-                <div class="machine-col machine-secrets">
-                    <p class="machine-label">{{server.label}}</p>
-                    <p class="machine-meta machine-ip"><i class="fa fa-cloud offset-right"></i><span class="text">{{server.main_ip}}</span></p>
-                    <p class="machine-meta"><i class="fa fa-lock offset-right"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <i class="fa fa-circle"></i>
-                        <span> [show]</span>
-                    </p>
-                </div>
-                <div class="machine-col machine-details">
-                    <p class="machine-meta"><i class="fa fa-server offset-right"></i>{{server.ram}} / {{server.vcpu_count}} CPUS [change]</p>
-                    <p class="machine-meta"><i class="fa fa-hdd-o offset-right"></i>{{server.disk}}</p>
-                    <p class="machine-meta"><i class="fa fa-linux offset-right"></i>{{server.os}} [change]</p>
-                </div>
+                <div class="pure-g">
+                    <div class="machine-col machine-secrets pure-u-1-1 pure-u-md-1-3">
+                        <p class="machine-label">{{server.label}}</p>
+                        <p class="machine-meta machine-ip"><i class="fa fa-cloud offset-right"></i><span class="text">{{server.main_ip}}</span></p>
+                        <p class="machine-meta"><i class="fa fa-lock offset-right"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <i class="fa fa-circle"></i>
+                            <span> [show]</span>
+                        </p>
+                    </div>
+                    <div class="machine-col machine-details pure-u-1-2 pure-u-md-1-3">
+                        <p class="machine-meta"><i class="fa fa-server offset-right"></i>{{server.ram}} / {{server.vcpu_count}} CPUS [change]</p>
+                        <p class="machine-meta"><i class="fa fa-hdd-o offset-right"></i>{{server.disk}}</p>
+                        <p class="machine-meta"><i class="fa fa-linux offset-right"></i>{{server.os}} [change]</p>
+                    </div>
 
-                <div class="machine-col machine-usage">
-                    <p class="machine-meta"><i class="fa fa-usd offset-right"></i>${{server.pending_charges}} / ${{server.cost_per_month}}</p>
-                    <p class="machine-meta"><i class="fa fa-exchange fa-rotate-90 offset-right"></i>{{server.current_bandwidth_gb}} / {{server.allowed_bandwidth_gb}} GB</p>
-                    <p class="machine-meta"><i class="fa fa-globe offset-right"></i>{{server.location}}</p>
+                    <div class="machine-col machine-usage pure-u-1-2 pure-u-md-1-3">
+                        <p class="machine-meta"><i class="fa fa-usd offset-right"></i>${{server.pending_charges}} / ${{server.cost_per_month}}</p>
+                        <p class="machine-meta"><i class="fa fa-exchange fa-rotate-90 offset-right"></i>{{server.current_bandwidth_gb}} / {{server.allowed_bandwidth_gb}} GB</p>
+                        <p class="machine-meta"><i class="fa fa-globe offset-right"></i>{{server.location}}</p>
+                    </div>
                 </div>
             </div>
             <ul class="machine-bottom nav status-{{server.status}} state-{{server.server_state}}">

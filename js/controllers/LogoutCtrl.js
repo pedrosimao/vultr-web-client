@@ -5,13 +5,15 @@
 vultrWebClient.controller('LogoutCtrl', [
   '$scope',
   '$location',
+  'accountService',
   'apiService',
   function(
     $scope,
     $location,
+    accountService,
     api
     ) {
       // Remove the api key and redirect to the start page
-      api.helpers.remove_key();
+      accountService.remove_key();
       $location.path('/login');
   }]);

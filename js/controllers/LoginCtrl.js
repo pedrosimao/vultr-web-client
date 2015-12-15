@@ -6,11 +6,13 @@ vultrWebClient.controller('LoginCtrl', [
   '$rootScope',
   '$scope',
   '$location',
+  'accountService',
   'apiService',
   function(
     $rootScope,
     $scope,
     $location,
+    accountService,
     api
     ) {
 
@@ -19,12 +21,12 @@ vultrWebClient.controller('LoginCtrl', [
 
       $scope.vultr_key = '';
       // Check if we have a stored key, if so redirect to the machines page
-      if(api.helpers.get_key()) {
+      if(accountService.get_key()) {
         $location.path('/machines');
       }
 
       $scope.save_key = function() {
-        api.helpers.set_key($scope.vultr_key);
+        accountService.add($scope.vultr_key, 'Default');
         $location.path('/machines');
         // @TODO: Implement a test API call to check if the key is valid
       };

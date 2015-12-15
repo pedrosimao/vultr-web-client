@@ -34,6 +34,11 @@ vultrWebClient.config([
         controller: 'DeployCtrl',
         label: 'Deploy'
       }).
+      when('/accounts', {
+        templateUrl: '_partials/sections/accounts.html',
+        controller: 'AccountsCtrl',
+        label: 'Accounts'
+      }).
       otherwise({
         redirectTo: '/'
       });

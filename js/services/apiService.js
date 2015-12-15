@@ -2,16 +2,15 @@
  * apiService - A wrapper around Vultr API calls
  */
 vultrWebClient.factory('apiService', [
+  'accountService',
   '$rootScope',
   '$http',
   '$q',
   function(
+    accountService,
     $rootScope,
     $http,
     $q) {
-
-      var helpers = {};
-
       // Endpoints.
       var accounts = {};
       var app = {};
@@ -26,26 +25,6 @@ vultrWebClient.factory('apiService', [
       var sshkey = {};
       var startupscript = {};
 
-
-      // Initialisation..
-      var vultr_key = localStorage.getItem("vultr-key");
-
-      /**
-       * Helper methods.
-       */
-      helpers.get_key = function() {
-        return vultr_key;
-      };
-      helpers.set_key = function(key) {
-        localStorage.setItem("vultr-key", key);
-        vultr_key = key;
-      };
-      helpers.remove_key = function() {
-        console.warn('Logging out');
-        localStorage.removeItem("vultr-key");
-        vultr_key = null;
-      };
-
       /****************************************
        * API ENDPOINT IMPLEMENTATIONS
        ****************************************/
@@ -56,7 +35,7 @@ vultrWebClient.factory('apiService', [
       accounts.list = function() {
         return $http.post('/proxy/account/info',
             {
-              'api_key': vultr_key
+              'api_key': accountService.get_key()
             }
           )
           .then(function(response) {
@@ -76,7 +55,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/os/list',
             {
-              'api_key': vultr_key
+              'api_key': accountService.get_key()
             }
           )
           .then(function(response) {
@@ -97,7 +76,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/plans/list',
             {
-              'api_key': vultr_key
+              'api_key': accountService.get_key()
             }
           )
           .then(function(response) {
@@ -119,7 +98,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/server/bandwidth',
             {
-              'api_key': vultr_key,
+              'api_key': accountService.get_key(),
               'SUBID': subid
             }
           )
@@ -147,7 +126,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/server/create',
             {
-              'api_key': vultr_key,
+              'api_key': accountService.get_key(),
               'DCID': dcid,
               'OSID': osid,
               'VPSPLANID': vpsplanid,
@@ -171,7 +150,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/server/list',
             {
-              'api_key': vultr_key,
+              'api_key': accountService.get_key(),
               'SUBID': subid
             }
           )
@@ -191,7 +170,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/server/destroy',
             {
-              'api_key': vultr_key,
+              'api_key': accountService.get_key(),
               'SUBID': subid
             }
           )
@@ -211,7 +190,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/server/halt',
             {
-              'api_key': vultr_key,
+              'api_key': accountService.get_key(),
               'SUBID': subid
             }
           )
@@ -231,7 +210,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/server/reboot',
             {
-              'api_key': vultr_key,
+              'api_key': accountService.get_key(),
               'SUBID': subid
             }
           )
@@ -251,7 +230,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/server/reinstall',
             {
-              'api_key': vultr_key,
+              'api_key': accountService.get_key(),
               'SUBID': subid
             }
           )
@@ -271,7 +250,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/server/start',
             {
-              'api_key': vultr_key,
+              'api_key': accountService.get_key(),
               'SUBID': subid
             }
           )
@@ -294,7 +273,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/sshkey/list',
             {
-              'api_key': vultr_key
+              'api_key': accountService.get_key()
             }
           )
           .then(function(response) {
@@ -316,7 +295,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/startupscript/list',
             {
-              'api_key': vultr_key
+              'api_key': accountService.get_key()
             }
           )
           .then(function(response) {
@@ -338,7 +317,7 @@ vultrWebClient.factory('apiService', [
         var d = $q.defer();
         $http.post('/proxy/regions/list',
             {
-              'api_key': vultr_key
+              'api_key': accountService.get_key()
             }
           )
           .then(function(response) {
@@ -353,7 +332,6 @@ vultrWebClient.factory('apiService', [
 
       // Public functions
       return {
-        helpers: helpers,
         accounts: accounts,
         os: os,
         plans: plans,
