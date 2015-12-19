@@ -2,7 +2,10 @@
  * accountService - Provides access to stored Vultr Account API keys
  */
 vultrWebClient.factory('accountService', [
-  function() {
+  '$http',
+  function(
+    $http
+    ) {
 
     // Initialisation..
     var vultr_key = localStorage.getItem("vultr-key");
@@ -38,6 +41,21 @@ vultrWebClient.factory('accountService', [
       vultr_key = null;
     };
 
+
+    var login = function(email, password) {
+      return $http.post('https://my.vultr.com',
+        {
+          'action': 'login',
+          'username': email,
+          'password': password
+        }
+      )
+      .then(function(response) {
+        console.log(response);
+      }, function(error) {
+        console.log(error);
+      });
+    };
 
 
     /**
@@ -84,6 +102,8 @@ vultrWebClient.factory('accountService', [
       set_key: set_key,
       remove_key: remove_key,
       
+      login: login,
+
       add: add,
       get: get
     };

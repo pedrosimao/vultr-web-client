@@ -20,10 +20,16 @@ vultrWebClient.controller('LoginCtrl', [
       clearInterval($rootScope.machine_list_refresh_interval);
 
       $scope.vultr_key = '';
+      $scope.vultr_email = '';
+      $scope.vultr_password = '';
       // Check if we have a stored key, if so redirect to the machines page
       if(accountService.get_key()) {
         $location.path('/machines');
       }
+
+      $scope.login = function() {
+        accountService.login($scope.vultr_email, $scope.vultr_password);
+      };
 
       $scope.save_key = function() {
         accountService.add($scope.vultr_key, 'Default');
