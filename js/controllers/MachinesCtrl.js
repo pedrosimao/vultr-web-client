@@ -174,7 +174,7 @@ vultrWebClient.controller('MachinesCtrl', [
           console.log(result);
           $scope.snapshots = result;
           for(var i in $scope.snapshots) {
-            $scope.snapshots[i].size_formatted = Math.ceil(parseInt($scope.snapshots[i].size) / 1024 / 1024 / 1048) + 'GB'
+            $scope.snapshots[i].size_formatted = Math.ceil(parseInt($scope.snapshots[i].size) / 1024 / 1024 / 1024) + 'GB'
             if($scope.snapshots[i].description === '') {
               $scope.snapshots[i].description = '[untitled]';
             }
