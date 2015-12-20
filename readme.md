@@ -17,3 +17,7 @@ It is recommended to use [Vagrant](https://www.vagrantup.com/) and [ScotchBox](h
 * cd public
 * npm install
 * gulp watch (to compile less and bundle assets while developing)
+
+
+## Installing on Ubuntu
+See issue [#15](https://github.com/se1exin/vultr-web-client/issues/15)
