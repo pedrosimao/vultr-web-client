@@ -96,7 +96,8 @@
                             <i class="fa fa-cloud"></i>
                             <p class="label">Network</p>
                         </li>
-                        <li class="machine-btn info snapshots">
+                        <li class="machine-btn info snapshots"
+                            ng-click="info_snapshots()">
                             <i class="fa fa-camera-retro"></i>
                             <p class="label">Snapshots</p>
                         </li>
@@ -114,16 +115,41 @@
                         </li>
                     </ul>
                     <div class="info-bottom">
-                        <div class="info-panel usage">
-                            <div ng-show="bandwidth">
-                                <canvas id="line" class="chart chart-line" chart-data="bandwidth.data"
-                                  chart-labels="bandwidth.labels" chart-legend="true" chart-series="bandwidth.series">
-                                </canvas>
+                        <div class="info-panel usage"
+                             ng-show="current_panel.name == 'usage' && !current_panel.loading">
+                            <canvas id="line" class="chart chart-line" chart-data="bandwidth.data"
+                              chart-labels="bandwidth.labels" chart-legend="true" chart-series="bandwidth.series">
+                            </canvas>
                             <p class="text-italic text-center panel-msg">Note: only bandwidth usage is available at this time</p>
+                        </div>
+                        <div class="info-panel snapshots"
+                             ng-show="current_panel.name == 'snapshots' && !current_panel.loading">
+                            <div class="snapshot" ng-repeat="snapshot in snapshots">
+                                <div class="info pure-g">
+                                    <div class="pure-u-3-4 details">
+                                        <p class="name">{{ snapshot.description }}</p>
+                                        <p class="date">{{ snapshot.date_created }}</p>
+                                        <p class="size">{{ snapshot.size_formatted }}</p>
+                                        <p class="id">{{ snapshot.SNAPSHOTID }}</p>
+                                    </div>
+                                    <div class="pure-u-1-4">
+                                        <ul class="nav buttons vhcenter">
+                                            <li class="machine-btn snapshot-btn restore">
+                                                <i class="fa fa-cloud-upload"></i>
+                                            </li>
+                                            <li class="machine-btn snapshot-btn delete"
+                                                ng-click="snapshot_action_destroy(snapshot.SNAPSHOTID)">
+                                                <i class="fa fa-times"></i>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="panel-loading" ng-hide="bandwidth">
-                                <i class="fa fa-spin fa-circle-o-notch loading"></i>
-                            </div>
+                        </div>
+                            
+                        <div class="panel-loading" ng-show="current_panel.loading">
+                            <i class="fa fa-spin fa-circle-o-notch loading"></i>
                         </div>
                     </div>
                 </div>

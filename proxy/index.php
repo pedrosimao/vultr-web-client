@@ -158,6 +158,30 @@ switch($context) {
         }
         break;
 
+    // Snapshiot resources
+    case 'snapshot':
+        switch ($action) {
+            // Retrieve list of snapshots
+            case 'list':
+                try {
+                    echo json_encode($api->snapshot_list());
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+
+            // Destroy a snapshot
+            case 'destroy':
+                try {
+                    $snapshot_id = (isset($postdata->SNAPSHOTID)) ? $postdata->SNAPSHOTID : '';
+                    echo json_encode($api->snapshot_destroy($snapshot_id));
+                } catch(Exception $ex) {
+                    http_response_code(400);
+                }
+                break;
+        }
+        break;
+
     // SSH Key resources
     case 'sshkey':
         switch ($action) {

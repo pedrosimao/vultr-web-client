@@ -97,6 +97,13 @@ a {
 .pacman {
   width: 99.9%;
 }
+.vhcenter {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 .img-responsive {
   width: 100%;
   max-width: 100%;
@@ -570,6 +577,60 @@ table {
 .machine .machine-more .info-bottom .panel-loading .fa {
   font-size: 32px;
   color: #25aacb;
+}
+.machine .machine-more .snapshots .snapshot {
+  border-bottom: 1px solid #DDE;
+  padding: 10px 10px;
+  position: relative;
+}
+.machine .machine-more .snapshots .snapshot:first-child {
+  padding-top: 0;
+}
+.machine .machine-more .snapshots .snapshot:last-child {
+  border: none;
+  padding-bottom: 0;
+}
+.machine .machine-more .snapshots .snapshot .details {
+  padding: 10px;
+}
+.machine .machine-more .snapshots .snapshot .name {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 6px;
+  margin-top: 0;
+}
+.machine .machine-more .snapshots .snapshot .date,
+.machine .machine-more .snapshots .snapshot .id,
+.machine .machine-more .snapshots .snapshot .size {
+  text-transform: uppercase;
+  font-size: 11px;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+.machine .machine-more .snapshots .snapshot .date,
+.machine .machine-more .snapshots .snapshot .size {
+  color: #999;
+}
+.machine .machine-more .snapshots .snapshot .id {
+  margin-top: 4px;
+  color: #CCC;
+}
+.machine .machine-more .snapshots .snapshot .buttons {
+  width: 150px;
+  right: 20px;
+}
+.machine .machine-more .snapshots .snapshot .snapshot-btn {
+  width: 50%;
+  border: none;
+  padding: 0;
+  line-height: 1em;
+}
+.machine .machine-more .snapshots .snapshot .snapshot-btn i {
+  font-size: 1.8em;
+  color: #999;
+}
+.machine .machine-more .snapshots .snapshot .snapshot-btn:hover i {
+  color: #333;
 }
 @keyframes flash-status {
   0% {

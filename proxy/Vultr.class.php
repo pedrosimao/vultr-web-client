@@ -828,7 +828,6 @@ class Vultr
         //$response = $this->serveFromCache($_defaults[CURLOPT_URL]);
     if ($response !== false)
         {
-          //echo "FROM CACHE: $url\n";
           return $response;
         }
       break;
